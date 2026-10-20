@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="700" viewBox="0 0 1800 700" font-family="Helvetica, Arial, sans-serif">
+<rect width="1800" height="700" fill="#fbfbf8"/>
+<text x="70" y="34" font-size="20" fill="#1f2328">MM-DRAM-SIM-001 · measured object-graph / resident-slab byte ratio · dram-sim-20260929T114147Z</text>
+<text x="70" y="56" font-size="13" fill="#555">4 workloads · 7 repetitions each · median with q1-q3 whiskers · tick = no-edge floor · model line = declared parameters only · v22.23.2 · pointer compression off</text>
+<line x1="70" y1="610" x2="870" y2="610" stroke="#d9d9d3"/>
+<text x="62" y="614" font-size="12" text-anchor="end" fill="#555">0x</text>
+<line x1="70" y1="500.8978373643435" x2="870" y2="500.8978373643435" stroke="#d9d9d3"/>
+<text x="62" y="504.8978373643435" font-size="12" text-anchor="end" fill="#555">1x</text>
+<line x1="70" y1="391.795674728687" x2="870" y2="391.795674728687" stroke="#d9d9d3"/>
+<text x="62" y="395.795674728687" font-size="12" text-anchor="end" fill="#555">2x</text>
+<line x1="70" y1="282.69351209303056" x2="870" y2="282.69351209303056" stroke="#d9d9d3"/>
+<text x="62" y="286.69351209303056" font-size="12" text-anchor="end" fill="#555">3x</text>
+<line x1="70" y1="173.591349457374" x2="870" y2="173.591349457374" stroke="#d9d9d3"/>
+<text x="62" y="177.591349457374" font-size="12" text-anchor="end" fill="#555">4x</text>
+<line x1="70" y1="64.48918682171757" x2="870" y2="64.48918682171757" stroke="#d9d9d3"/>
+<text x="62" y="68.48918682171757" font-size="12" text-anchor="end" fill="#555">5x</text>
+<rect x="120" y="374.0793228732899" width="100" height="235.92067712671007" fill="#2f6db5"/>
+<line x1="170" y1="374.118212948247" x2="170" y2="374.0638230582214" stroke="#1f2328" stroke-width="2"/>
+<text x="170" y="366.0793228732899" font-size="14" text-anchor="middle" fill="#1f2328">2.162x (IQR 0.0231%)</text>
+<line x1="110" y1="439.53677996705994" x2="230" y2="439.53677996705994" stroke="#1f2328" stroke-width="2" stroke-dasharray="4 3"/>
+<text x="234" y="443.53677996705994" font-size="11" fill="#1f2328">no edges 1.562x</text>
+<text x="170" y="628" font-size="12" text-anchor="middle" fill="#1f2328">V8 Mixed Object Graphs</text>
+<text x="170" y="644" font-size="11" text-anchor="middle" fill="#555">n=200000 · E=400000</text>
+<rect x="320" y="289.3489243705595" width="100" height="320.6510756294405" fill="#2f6db5"/>
+<line x1="370" y1="289.3588933602114" x2="370" y2="289.3489243705595" stroke="#1f2328" stroke-width="2"/>
+<text x="370" y="281.3489243705595" font-size="14" text-anchor="middle" fill="#1f2328">2.939x (IQR 0.0031%)</text>
+<line x1="310" y1="344.10066349150634" x2="430" y2="344.10066349150634" stroke="#1f2328" stroke-width="2" stroke-dasharray="4 3"/>
+<text x="434" y="348.10066349150634" font-size="11" fill="#1f2328">no edges 2.437x</text>
+<text x="370" y="628" font-size="12" text-anchor="middle" fill="#1f2328">Multi-Agent Conversational State</text>
+<text x="370" y="644" font-size="11" text-anchor="middle" fill="#555">n=50000 · E=100000</text>
+<rect x="520" y="500.2237349115433" width="100" height="109.77626508845668" fill="#2f6db5"/>
+<line x1="570" y1="500.2360931903123" x2="570" y2="500.2237349115433" stroke="#1f2328" stroke-width="2"/>
+<text x="570" y="492.2237349115433" font-size="14" text-anchor="middle" fill="#1f2328">1.006x (IQR 0.0113%)</text>
+<line x1="510" y1="500.3827267726489" x2="630" y2="500.3827267726489" stroke="#1f2328" stroke-width="2" stroke-dasharray="4 3"/>
+<text x="634" y="504.3827267726489" font-size="11" fill="#1f2328">no edges 1.005x</text>
+<text x="570" y="628" font-size="12" text-anchor="middle" fill="#1f2328">Video Pipeline Buffers &amp; Metadata</text>
+<text x="570" y="644" font-size="11" text-anchor="middle" fill="#555">n=350 · E=700</text>
+<rect x="720" y="274.05199261548216" width="100" height="335.94800738451784" fill="#2f6db5"/>
+<line x1="770" y1="274.1454818666792" x2="770" y2="274.04943186743196" stroke="#1f2328" stroke-width="2"/>
+<text x="770" y="266.05199261548216" font-size="14" text-anchor="middle" fill="#1f2328">3.079x (IQR 0.0286%)</text>
+<line x1="710" y1="282.7086492706981" x2="830" y2="282.7086492706981" stroke="#1f2328" stroke-width="2" stroke-dasharray="4 3"/>
+<text x="834" y="286.7086492706981" font-size="11" fill="#1f2328">no edges 3.000x</text>
+<text x="770" y="628" font-size="12" text-anchor="middle" fill="#1f2328">Physics State (XPBD Particles)</text>
+<text x="770" y="644" font-size="11" text-anchor="middle" fill="#555">n=100000 · E=200000</text>
+<line x1="70" y1="157.8260869565217" x2="870" y2="157.8260869565217" stroke="#b5482f" stroke-width="2" stroke-dasharray="8 6"/>
+<text x="864" y="151.8260869565217" font-size="13" text-anchor="end" fill="#b5482f">W_model = 4.1445x (beta 3.5, alpha_gc 0.25, gamma 1, f 0.126)</text>
+<text x="70" y="80" font-size="14" fill="#1f2328">mean of medians 2.2967x · byte-weighted 2.1196x · gap to model 44.58% · no-edge mean 2.001x</text>
+<line x1="980" y1="610" x2="1740" y2="610" stroke="#d9d9d3"/>
+<text x="972" y="614" font-size="12" text-anchor="end" fill="#555">0 MB</text>
+<line x1="980" y1="534.0126955518125" x2="1740" y2="534.0126955518125" stroke="#d9d9d3"/>
+<text x="972" y="538.0126955518125" font-size="12" text-anchor="end" fill="#555">10 MB</text>
+<line x1="980" y1="458.025391103625" x2="1740" y2="458.025391103625" stroke="#d9d9d3"/>
+<text x="972" y="462.025391103625" font-size="12" text-anchor="end" fill="#555">20 MB</text>
+<line x1="980" y1="382.0380866554375" x2="1740" y2="382.0380866554375" stroke="#d9d9d3"/>
+<text x="972" y="386.0380866554375" font-size="12" text-anchor="end" fill="#555">30 MB</text>
+<line x1="980" y1="306.05078220725" x2="1740" y2="306.05078220725" stroke="#d9d9d3"/>
+<text x="972" y="310.05078220725" font-size="12" text-anchor="end" fill="#555">40 MB</text>
+<line x1="980" y1="230.06347775906244" x2="1740" y2="230.06347775906244" stroke="#d9d9d3"/>
+<text x="972" y="234.06347775906244" font-size="12" text-anchor="end" fill="#555">50 MB</text>
+<line x1="980" y1="154.07617331087494" x2="1740" y2="154.07617331087494" stroke="#d9d9d3"/>
+<text x="972" y="158.07617331087494" font-size="12" text-anchor="end" fill="#555">60 MB</text>
+<rect x="1006.6" y="157.8260869565217" width="60.800000000000004" height="452.1739130434783" fill="#8a8f98"/>
+<rect x="1082.6" y="400.89339893527153" width="60.800000000000004" height="209.10660106472847" fill="#2f6db5"/>
+<text x="1037" y="151.8260869565217" font-size="12" text-anchor="middle" fill="#1f2328">59.51</text>
+<text x="1113" y="394.89339893527153" font-size="12" text-anchor="middle" fill="#1f2328">27.52</text>
+<text x="1075" y="628" font-size="12" text-anchor="middle" fill="#1f2328">V8 Mixed Object Graphs</text>
+<text x="1075" y="644" font-size="11" text-anchor="middle" fill="#555">edges 35.89% of object bytes</text>
+<text x="1075" y="658" font-size="11" text-anchor="middle" fill="#555">56.0 vs 8.1 B per edge</text>
+<rect x="1196.6" y="456.3739519293459" width="60.800000000000004" height="153.62604807065412" fill="#8a8f98"/>
+<rect x="1272.6" y="557.7286108482273" width="60.800000000000004" height="52.27138915177272" fill="#2f6db5"/>
+<text x="1227" y="450.3739519293459" font-size="12" text-anchor="middle" fill="#1f2328">20.22</text>
+<text x="1303" y="551.7286108482273" font-size="12" text-anchor="middle" fill="#1f2328">6.88</text>
+<text x="1265" y="628" font-size="12" text-anchor="middle" fill="#1f2328">Multi-Agent Conversational State</text>
+<text x="1265" y="644" font-size="11" text-anchor="middle" fill="#555">edges 26.42% of object bytes</text>
+<text x="1265" y="658" font-size="11" text-anchor="middle" fill="#555">56.0 vs 8.1 B per edge</text>
+<rect x="1386.6" y="442.37672080959885" width="60.800000000000004" height="167.62327919040115" fill="#8a8f98"/>
+<rect x="1462.6" y="443.40604407503895" width="60.800000000000004" height="166.59395592496105" fill="#2f6db5"/>
+<text x="1417" y="436.37672080959885" font-size="12" text-anchor="middle" fill="#1f2328">22.06</text>
+<text x="1493" y="437.40604407503895" font-size="12" text-anchor="middle" fill="#1f2328">21.92</text>
+<text x="1455" y="628" font-size="12" text-anchor="middle" fill="#1f2328">Video Pipeline Buffers &amp; Metadata</text>
+<text x="1455" y="644" font-size="11" text-anchor="middle" fill="#555">edges 0.17% of object bytes</text>
+<text x="1455" y="658" font-size="11" text-anchor="middle" fill="#555">56.0 vs 8.1 B per edge</text>
+<rect x="1576.6" y="180.99273031385388" width="60.800000000000004" height="429.0072696861461" fill="#8a8f98"/>
+<rect x="1652.6" y="470.6766465402562" width="60.800000000000004" height="139.32335345974383" fill="#2f6db5"/>
+<text x="1607" y="174.99273031385388" font-size="12" text-anchor="middle" fill="#1f2328">56.46</text>
+<text x="1683" y="464.6766465402562" font-size="12" text-anchor="middle" fill="#1f2328">18.34</text>
+<text x="1645" y="628" font-size="12" text-anchor="middle" fill="#1f2328">Physics State (XPBD Particles)</text>
+<text x="1645" y="644" font-size="11" text-anchor="middle" fill="#555">edges 35.14% of object bytes</text>
+<text x="1645" y="658" font-size="11" text-anchor="middle" fill="#555">104.0 vs 32.1 B per edge</text>
+<rect x="980" y="68" width="14" height="14" fill="#8a8f98"/><text x="1000" y="80" font-size="13" fill="#1f2328">V8 object graph (heapUsed + arrayBuffers)</text>
+<rect x="1310" y="68" width="14" height="14" fill="#2f6db5"/><text x="1330" y="80" font-size="13" fill="#1f2328">resident slab (128 B records + edges + bitmask)</text>
+<text x="70" y="670" font-size="12" fill="#555">net reduction: mean of per-workload 46.96% · byte-weighted 52.82% · from mean ratio 56.46% (largest: from_mean_ratio) · no edges: 40.53% / 42.11%</text>
+<text x="70" y="688" font-size="12" fill="#555">author scripts/dram-multiplier-harness.mjs sha256 c0d542077ee0b1a3 · zero-GC slab mutation true · 128 B packing true · declared model parameters within 10% false</text>
+</svg>

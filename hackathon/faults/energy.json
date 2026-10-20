@@ -1,0 +1,12 @@
+{
+  "id": "energy",
+  "invariant": "energy: passive damped soft-body kinetic energy must not grow above initial impulse energy (dK <= 1e-6 J)",
+  "expectedRedTest": "fault invariant [energy]: passive damped soft-body does not create kinetic energy (units: J)",
+  "units": "J",
+  "threshold": 1e-6,
+  "description": "Drop exponential damping term (Math.exp(-state.damping * h) -> 1.008), injecting artificial kinetic energy each substep.",
+  "patch": {
+    "find": "const dampF = Math.exp(-state.damping * h);",
+    "replace": "const dampF = 1.008; /* FAULT:energy */"
+  }
+}

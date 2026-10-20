@@ -1,0 +1,12 @@
+{
+  "id": "instability",
+  "invariant": "instability: substep integration displacement stays bounded within physical free-fall envelope (maxDisplacementM <= 0.10 m over 0.1 s)",
+  "expectedRedTest": "fault invariant [instability]: timestep integration displacement stays within physical bound (units: m)",
+  "units": "m",
+  "threshold": 0.10,
+  "description": "Multiply substep duration h by 8x ((dt * 8) / ss), causing displacement to blow past physical bound.",
+  "patch": {
+    "find": "const h = dt / ss;",
+    "replace": "const h = (dt * 8) / ss; /* FAULT:instability */"
+  }
+}

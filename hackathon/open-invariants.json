@@ -1,0 +1,17 @@
+{
+  "updated_at": "2026-10-14T09:50:50.383Z",
+  "open": [
+    {
+      "id": "inv-10-stiffness-monotonicity",
+      "invariant": "constraint drift: stiffer Young modulus E=300 kPa sags strictly less than E=3 kPa under gravity (units: m)"
+    },
+    {
+      "id": "inv-11-shear-wave-speed",
+      "invariant": "energy: acoustic shear wave speed c_s = sqrt(mu/rho) matches analytical continuum value within 1e-6 m/s (units: m/s)"
+    },
+    {
+      "id": "inv-12-zero-dt-noop",
+      "invariant": "timestep stability: zero timestep dt=0 leaves particle buffer and invH2 unchanged (0.0 m mutation) (units: m)"
+    }
+  ]
+}

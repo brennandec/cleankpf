@@ -1,0 +1,152 @@
+{
+  "schema": "kpf.hackathon-bundle-public/1",
+  "generated_at": "2026-10-20T11:33:16.204Z",
+  "source_private_manifest_sha256": "89e9bf0851bcce1dce5a08389aa132115e7885cba9edc8ecf084860953a531bc",
+  "files": [
+    {
+      "path": "COMMITTED-STATE.json",
+      "bytes": 1154,
+      "sha256": "cb3d696886263ab6f557a298d834e212de797f0a24b3adc6ae28c2a8306193c9",
+      "class": "hash-chained-ledger"
+    },
+    {
+      "path": "COMMITTED-STATE.sha256",
+      "bytes": 65,
+      "sha256": "dd0a8124d986e838ccb1852e582cb43e6b444fdbd8c8cf20460397aad08163ce",
+      "class": "hash-chained-ledger"
+    },
+    {
+      "path": "HACKATHON-APPLICATION.md",
+      "bytes": 6841,
+      "sha256": "6c1cea3725c2de068bfdff3fc9169d0d4f96d5c079377465649de1a10a9e229a",
+      "class": "plan"
+    },
+    {
+      "path": "HACKATHON-PROMPT.md",
+      "bytes": 2598,
+      "sha256": "e4bc644340d9fff616324a85e04c47ea9c9bfb5194555082e0b687d185337060",
+      "class": "plan (public copy, redacted)",
+      "redactions": [
+        "removed architect email parenthetical",
+        "account work-order door → the work-order door"
+      ]
+    },
+    {
+      "path": "LEDGER.jsonl",
+      "bytes": 8478,
+      "sha256": "a9c3bbbde36e20eec185bd5a0d33ac548bd46c1eb532564ae108444571dbf01e",
+      "class": "hash-chained-ledger"
+    },
+    {
+      "path": "README.md",
+      "bytes": 9052,
+      "sha256": "536373ba296de4617e4bd10c28232f26b18cef8a6ce1e706544c41eea33fd928",
+      "class": "public-page"
+    },
+    {
+      "path": "REHEARSAL-1.md",
+      "bytes": 1324,
+      "sha256": "b3863d8440af515ae6346055be2a303244fadb7871931d8dfda28cb7f23dbd94",
+      "class": "derived-receipt"
+    },
+    {
+      "path": "REHEARSAL-2.md",
+      "bytes": 1349,
+      "sha256": "36461872c1ad9297c7604a507febbd57ae7e806234487071e86c04e7a2764f0c",
+      "class": "derived-receipt"
+    },
+    {
+      "path": "REHEARSAL-3.md",
+      "bytes": 1609,
+      "sha256": "2b3790a3b7f8cb2317c0a1c10625431d441626e80c4e614e6c87ae95ed61893d",
+      "class": "derived-receipt (public copy, redacted)",
+      "redactions": [
+        "review mention → a review seat (P-H3)"
+      ]
+    },
+    {
+      "path": "dram-sim-20260929T114147Z.json",
+      "bytes": 110284,
+      "sha256": "7b491499d1534e5f2a8840bb6de16a2346f0c02d58cb0a9fc58f14902deddb41",
+      "class": "derived-receipt"
+    },
+    {
+      "path": "dram-sim-20260929T114147Z.png",
+      "bytes": 120645,
+      "sha256": "acc803b4662b42dd88537bb29d318ddf7c96e24f96f85a7d25a52ae1c594a6b3",
+      "class": "derived-receipt"
+    },
+    {
+      "path": "dram-sim-20260929T114147Z.svg",
+      "bytes": 9962,
+      "sha256": "f8730606d1256d8bd21da287a4135271c300bff41a0941c9e2634c69ed73547b",
+      "class": "derived-receipt"
+    },
+    {
+      "path": "faults/energy.json",
+      "bytes": 574,
+      "sha256": "b91ced3157e069259f50abe63bc6937b4ee60779d967622796b7eab97c9623d7",
+      "class": "source"
+    },
+    {
+      "path": "faults/instability.json",
+      "bytes": 583,
+      "sha256": "261a5568cc5ad029b563612bfe4398882d49414d9fc71d50801493c480e29079",
+      "class": "source"
+    },
+    {
+      "path": "faults/momentum.json",
+      "bytes": 667,
+      "sha256": "9075ec40e07e361c74e3d9912422deb96f52db5903bf002f37086404cd46756e",
+      "class": "source"
+    },
+    {
+      "path": "faults/nan.json",
+      "bytes": 589,
+      "sha256": "871bda335d9fe2c4e3e4b5db8bd5f5395121a13344189378d8e638ea950657f1",
+      "class": "source"
+    },
+    {
+      "path": "loop-record-2026-09.public.jsonl",
+      "bytes": 4453547,
+      "sha256": "fa21e76aa0f30275c4db4bcf127a6500824e3b12b152e1f4013bf1714bd65d5f",
+      "class": "observed-record"
+    },
+    {
+      "path": "loop-record-2026-09.summary.json",
+      "bytes": 1436,
+      "sha256": "3fe29bb8e9bb5e072ef64eeb6000515a2ea6a0703e2b91ce55ea2adddcdbe74f",
+      "class": "observed-record"
+    },
+    {
+      "path": "muse-time-of-death-loop723.png",
+      "bytes": 323380,
+      "sha256": "69366f36ca6b41e24c58879ed7d2acd41346183dc0beb885735916875d7721bd",
+      "class": "observed-record"
+    },
+    {
+      "path": "open-invariants.json",
+      "bytes": 618,
+      "sha256": "e055fbd23418f8b5a436aa38294f43f650b4e376d3def654a36f4c93c6e4b126",
+      "class": "hash-chained-ledger"
+    },
+    {
+      "path": "r1-ledger.jsonl",
+      "bytes": 4216,
+      "sha256": "6cb04ea34f971435fdb477001d2151767f49afa0d4b52da32c07f503d5f8c3c3",
+      "class": "hash-chained-ledger"
+    },
+    {
+      "path": "r2-ledger.jsonl",
+      "bytes": 2994,
+      "sha256": "4d182c9d77de94eb66fe86c35380e0ad2a1047d0e09d3e0949c616d8f6191794",
+      "class": "hash-chained-ledger"
+    },
+    {
+      "path": "r3-ledger.jsonl",
+      "bytes": 3473,
+      "sha256": "917a1d2fc5c06ab5a8f2fa20ce472e40463660ea885466f6e58b9065453e4193",
+      "class": "hash-chained-ledger"
+    }
+  ]
+}

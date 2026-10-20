@@ -1,0 +1,12 @@
+{
+  "id": "momentum",
+  "invariant": "momentum: isolated free soft-body conserves linear momentum across internal edge projections (|dP| <= 1e-9 kg*m/s)",
+  "expectedRedTest": "fault invariant [momentum]: isolated soft-body conserves linear momentum under internal constraint projection (units: kg*m/s)",
+  "units": "kg*m/s",
+  "threshold": 1e-9,
+  "description": "Asymmetric edge constraint projection (+1.25x impulse on endpoint b), causing net center-of-mass momentum drift.",
+  "patch": {
+    "find": "p[b] += cbx; p[b + 1] += cby; p[b + 2] += cbz;",
+    "replace": "p[b] += cbx * 1.25; p[b + 1] += cby * 1.25; p[b + 2] += cbz * 1.25; /* FAULT:momentum */"
+  }
+}

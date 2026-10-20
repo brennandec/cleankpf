@@ -1,0 +1,2674 @@
+{
+  "docket": "MM-DRAM-SIM-001",
+  "run_id": "dram-sim-20260929T114147Z",
+  "timestamp_utc": "20260929T114147Z",
+  "reference": "White Paper #1 · Compact Resident Slab Architecture (§3.1-3.2)",
+  "author": {
+    "script": "scripts/dram-multiplier-harness.mjs",
+    "sha256": "c0d542077ee0b1a34e3a06cd857eb7c9bc584cd999df5ff48b52529e682d5fe1"
+  },
+  "runtime": {
+    "node": "v22.23.2",
+    "v8": "12.4.254.21-node.56",
+    "uv": "1.51.0",
+    "arch": "arm64",
+    "platform": "Darwin 27.0.0",
+    "exec_argv": [
+      "--expose-gc"
+    ],
+    "gc_exposed": true,
+    "pointer_compression": {
+      "config_variable": "process.config.variables.v8_enable_pointer_compression",
+      "observed_value": 0,
+      "enabled": false,
+      "tagged_pointer_bytes": 8,
+      "epistemic": "measured"
+    },
+    "smi_31bit_on_64bit": 0,
+    "v8_sandbox": 0,
+    "record_bytes_source": "engines/physics/runtime-fracture.mjs RECORD_BYTES",
+    "stride_source": "engines/physics/runtime-fracture.mjs STRIDE"
+  },
+  "observations": {
+    "pointer_compression_enabled": false,
+    "tagged_pointer_bytes": 8,
+    "note": "runtime facts read from process.config; they are observations, not pass/fail verdicts"
+  },
+  "hardware": {
+    "cpu": "Apple M5 Max",
+    "cores": 18,
+    "ram_gb": 36,
+    "arch": "arm64",
+    "os": "Darwin 27.0.0",
+    "gpu": null,
+    "gpu_note": "not queried; this harness never touches the GPU"
+  },
+  "config": {
+    "reps": 7,
+    "scale": 1,
+    "mutation_passes": 3,
+    "repro_band_pct": 1,
+    "model_parameter_band_pct": 10,
+    "edge_strides": [
+      1,
+      7
+    ],
+    "seeds": {
+      "w1_v8_mixed_object_graphs": 4097,
+      "w2_multi_agent_state": 8194,
+      "w3_video_pipeline": 12291,
+      "w4_physics_xpbd_particles": 16388
+    },
+    "counts": {
+      "w1_v8_mixed_object_graphs": 200000,
+      "w2_multi_agent_state": 50000,
+      "w3_video_pipeline": 350,
+      "w4_physics_xpbd_particles": 100000
+    }
+  },
+  "model": {
+    "expression": "W = (beta / (1 - alpha_gc)) / (gamma + f)",
+    "parameters": {
+      "beta": {
+        "value": 3.5,
+        "epistemic": "declared"
+      },
+      "alpha_gc": {
+        "value": 0.25,
+        "epistemic": "declared"
+      },
+      "gamma": {
+        "value": 1,
+        "epistemic": "declared"
+      },
+      "f": {
+        "value": 0.126,
+        "epistemic": "declared"
+      }
+    },
+    "w_model": {
+      "value": 4.1445,
+      "epistemic": "model"
+    }
+  },
+  "workloads": [
+    {
+      "key": "w1_v8_mixed_object_graphs",
+      "name": "V8 Mixed Object Graphs",
+      "entities": 200000,
+      "edges": 400000,
+      "seed": 4097,
+      "edge_strides": [
+        1,
+        7
+      ],
+      "reps": 7,
+      "object_graph": {
+        "shape": "{ id, timestamp, type: \"telemetry_node\", payload: { x, y, z }, tags: [\"sim\", \"kpf\"] } + edges [{ a, b, intact }]",
+        "heap_used_bytes": {
+          "n": 7,
+          "finite_samples": 7,
+          "median": 62397096,
+          "q1": 62395540,
+          "q3": 62403540,
+          "iqr": 8000,
+          "min": 61432408,
+          "max": 62421168,
+          "iqr_pct_of_median": 0.0128,
+          "samples": [
+            62421168,
+            62402120,
+            62397096,
+            62396760,
+            62404960,
+            61432408,
+            62394320
+          ],
+          "epistemic": "measured"
+        },
+        "array_buffers_bytes": {
+          "n": 7,
+          "finite_samples": 7,
+          "median": 0,
+          "q1": 0,
+          "q3": 0,
+          "iqr": 0,
+          "min": 0,
+          "max": 0,
+          "iqr_pct_of_median": null,
+          "samples": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "epistemic": "measured"
+        },
+        "external_bytes_median": 0,
+        "total_bytes_median": 62397096,
+        "bytes_per_entity_median": 311.99,
+        "method": "process.memoryUsage() delta (heapUsed + arrayBuffers) between a settled reading before building and a settled reading with the graph live; settled = forced full GC twice + 5 ms wait until both counters stop moving; no GC headroom applied"
+      },
+      "slab": {
+        "layout": {
+          "record_bytes": 128,
+          "fields": [
+            [
+              "id",
+              "u32",
+              0
+            ],
+            [
+              "timestamp",
+              "f64",
+              8
+            ],
+            [
+              "x",
+              "f64",
+              16
+            ],
+            [
+              "y",
+              "f64",
+              24
+            ],
+            [
+              "z",
+              "f64",
+              32
+            ],
+            [
+              "type_enum",
+              "u8",
+              40
+            ],
+            [
+              "tag_count",
+              "u8",
+              41
+            ],
+            [
+              "tag0_enum",
+              "u16",
+              42
+            ],
+            [
+              "tag1_enum",
+              "u16",
+              44
+            ]
+          ],
+          "records_buffer": "ArrayBuffer",
+          "edge_layout": {
+            "type": "Int32Array",
+            "buffer": "ArrayBuffer",
+            "bytes_per_edge": 8,
+            "fields": [
+              "a",
+              "b"
+            ],
+            "source": "harness layout: ordinal pairs; not taken from engines/physics/runtime-fracture.mjs"
+          },
+          "object_shape": "{ id, timestamp, type: \"telemetry_node\", payload: { x, y, z }, tags: [\"sim\", \"kpf\"] } + edges [{ a, b, intact }]"
+        },
+        "buffer_bytelength": {
+          "records": 25600000,
+          "edges": 3200000,
+          "status": 50000,
+          "plane": 0,
+          "total": 28850000,
+          "definition": "byteLength of the record buffer, edge buffer, status bitmask and plane as allocated from the entity count and the declared layout; exact by allocation, cross-checked below against the process.memoryUsage arrayBuffers delta",
+          "epistemic": "derivation"
+        },
+        "wrapper_heap_bytes": {
+          "n": 7,
+          "finite_samples": 7,
+          "median": 5368,
+          "q1": 4424,
+          "q3": 13268,
+          "iqr": 8844,
+          "min": -4960,
+          "max": 17880,
+          "iqr_pct_of_median": 164.7541,
+          "samples": [
+            17880,
+            5368,
+            14184,
+            4424,
+            -4960,
+            12352,
+            4424
+          ],
+          "epistemic": "measured"
+        },
+        "array_buffers_delta_bytes": {
+          "n": 7,
+          "finite_samples": 7,
+          "median": 28850000,
+          "q1": 28850000,
+          "q3": 28850000,
+          "iqr": 0,
+          "min": 28850000,
+          "max": 28850000,
+          "iqr_pct_of_median": 0,
+          "samples": [
+            28850000,
+            28850000,
+            28850000,
+            28850000,
+            28850000,
+            28850000,
+            28850000
+          ],
+          "epistemic": "measured"
+        },
+        "array_buffers_delta_matches_bytelength_1pct": true,
+        "total_bytes_median": 28855368,
+        "bytes_per_entity_median": 144.28,
+        "method": "buffer byteLength (record buffer + edge buffer + Uint32Array status bitmask + plane for W3) + the measured JS heap delta of their wrapper objects",
+        "layout_checks": {
+          "record_bytes": 128,
+          "is_128b_record": true,
+          "record_matches_engine_record_bytes": true,
+          "record_stride_multiple_of_alignment": true,
+          "alignment_bytes": 64,
+          "records_buffer_type": "ArrayBuffer",
+          "records_buffer_type_matches_declared": true,
+          "records_bytelength": 25600000,
+          "records_bytelength_equals_n_x_record": true,
+          "record_view_type": "DataView",
+          "field_map": {
+            "field_count": 9,
+            "payload_bytes_per_record": 42,
+            "span_bytes": 46,
+            "padding_bytes_per_record": 86,
+            "packing_efficiency": 0.3281,
+            "overlapping_fields": 0,
+            "misaligned_fields": 0,
+            "fields_fit_in_record": true,
+            "consistent": true,
+            "definition": "computed from the declared field map: payload = sum of field widths, span = max(offset + width); natural alignment = offset % width == 0 for numeric fields; consistent = no overlap, no misalignment, span <= record_bytes",
+            "epistemic": "derivation"
+          },
+          "record_round_trip_failures": 0,
+          "record_round_trip_method": "every record read back through an independent DataView at i x record_bytes + declared offset and compared with the values the builder wrote (ordinal, constants, rest == pos, unused slots zero)",
+          "edge_layout": {
+            "type": "Int32Array",
+            "buffer": "ArrayBuffer",
+            "bytes_per_edge": 8,
+            "fields": [
+              "a",
+              "b"
+            ],
+            "source": "harness layout: ordinal pairs; not taken from engines/physics/runtime-fracture.mjs"
+          },
+          "edge_buffer_type": "Int32Array",
+          "edge_buffer_type_matches_declared": true,
+          "edge_backing_buffer_type": "ArrayBuffer",
+          "edge_bytelength": 3200000,
+          "edge_bytelength_equals_E_x_bytes_per_edge": true,
+          "edge_faults": 0,
+          "status_bitmask_type": "Uint32Array",
+          "status_backing_buffer_type": "ArrayBuffer",
+          "status_words": 12500,
+          "status_words_equal_ceil_E_over_32": true,
+          "base_address_alignment": "not observable from JavaScript; only record offsets within the buffer are checked",
+          "direct_mode_128b_packing": true,
+          "direct_mode_128b_packing_definition": "record_bytes of this case is 128 AND stride % 64 == 0 AND the field map is consistent (no overlap, natural alignment, fits) AND every record reads back correctly AND buffer types match the declared layout AND no edge fault AND the status bitmask is Uint32; a 4 B record (adversarial A1) or a bad field map fails it"
+        }
+      },
+      "ratio": {
+        "n": 7,
+        "finite_samples": 7,
+        "median": 2.162383140969995,
+        "q1": 2.1620266853872865,
+        "q3": 2.1625252079528496,
+        "iqr": 0.0004985225655631531,
+        "min": 2.1284616028520476,
+        "max": 2.163455484894457,
+        "iqr_pct_of_median": 0.0231,
+        "samples": [
+          2.162305233359706,
+          2.1625827125129717,
+          2.161748137414867,
+          2.1624677033927275,
+          2.163455484894457,
+          2.1284616028520476,
+          2.162383140969995
+        ],
+        "ratio_of_medians": 2.162409,
+        "definition": "object_graph total bytes (measured) / slab total bytes (buffer byteLength + measured wrapper heap) per repetition; median, q1, q3, iqr over repetitions",
+        "epistemic": "measured"
+      },
+      "ratio_memory_usage_basis": {
+        "median": 2.162383140969995,
+        "iqr_pct_of_median": 0.0231,
+        "finite_samples": 7,
+        "definition": "object bytes / (measured arrayBuffers delta + measured wrapper heap delta): the same ratio with the slab side read from process.memoryUsage only; reported for comparison, not the primary",
+        "epistemic": "measured"
+      },
+      "model_applied": {
+        "ratio_with_gc_headroom": 2.8832,
+        "definition": "measured median ratio / (1 - alpha_gc); this is the model applied to the measurement, not a measurement",
+        "epistemic": "model"
+      },
+      "measured_parameters": {
+        "payload_S_bytes": {
+          "value": 8400000,
+          "definition": "S = n x payload_bytes_per_record (sum of the declared field widths, computed from the field map) + plane byteLength; the common denominator of beta, gamma and f; no instrument reading enters S",
+          "epistemic": "derivation"
+        },
+        "beta": {
+          "value": 7.4282,
+          "definition": "measured object-graph bytes (heapUsed + arrayBuffers delta, edge objects included) / S",
+          "epistemic": "derivation",
+          "numerator_epistemic": "measured"
+        },
+        "gamma_layout": {
+          "value": 3.0476,
+          "definition": "(record buffer + plane byteLength) / S = record_bytes / payload_bytes_per_record for a planeless workload; fixed by the declared field map and the 128 B stride, not by any instrument",
+          "epistemic": "derivation"
+        },
+        "f_edges_and_bitmask": {
+          "value": 0.3869,
+          "definition": "(edge buffer + status bitmask byteLength) / S; depends on the harness-chosen edges per entity (edge_strides) and the edge layout, so it is a choice, not a measurement of the engine",
+          "epistemic": "derivation"
+        },
+        "f_wrapper": {
+          "value": 0.000639,
+          "definition": "measured JS heap delta of the buffer wrapper objects / S",
+          "epistemic": "derivation",
+          "numerator_epistemic": "measured"
+        },
+        "f_total": {
+          "value": 0.3875,
+          "definition": "(slab total bytes - record and plane byteLength) / S = f_edges_and_bitmask + f_wrapper",
+          "epistemic": "derivation"
+        },
+        "alpha_gc": {
+          "value": 0.25,
+          "definition": "GC headroom reserve; a model parameter, not measured by this harness",
+          "epistemic": "declared"
+        },
+        "identity_beta_over_gamma_plus_f": {
+          "value": 2.162409,
+          "definition": "beta / (gamma + f) with the values above; equals object bytes / slab bytes by construction because all three share the denominator S; an algebraic identity, not a test, and no verdict depends on it",
+          "epistemic": "derivation"
+        },
+        "model_declared": {
+          "beta": 3.5,
+          "gamma": 1,
+          "f": 0.126,
+          "epistemic": "declared"
+        },
+        "gap_declared_vs_measured": {
+          "beta_pct": 112.235,
+          "gamma_pct": 204.7619,
+          "f_pct": 207.5745,
+          "band_pct": 10,
+          "definition": "|derived value - declared model value| / declared x 100 per parameter",
+          "epistemic": "derivation"
+        },
+        "declared_parameters_within_band": false
+      },
+      "edge_decomposition": {
+        "edges_per_entity": {
+          "value": 2,
+          "definition": "E / n set by edge_strides; a harness parameter",
+          "epistemic": "declared"
+        },
+        "object_bytes_per_edge": {
+          "value": 55.99,
+          "definition": "(measured object bytes with edges - measured object bytes without edges) / E",
+          "epistemic": "derivation"
+        },
+        "slab_bytes_per_edge": {
+          "value": 8.14,
+          "definition": "(slab bytes with edges - slab bytes without edges) / E",
+          "epistemic": "derivation"
+        },
+        "edge_share_of_object_bytes_pct": {
+          "value": 35.89,
+          "epistemic": "derivation"
+        },
+        "edge_share_of_slab_bytes_pct": {
+          "value": 11.28,
+          "epistemic": "derivation"
+        },
+        "no_edges": {
+          "object_bytes_median": 40000120,
+          "slab_bytes_median": 25600616,
+          "ratio": {
+            "n": 7,
+            "finite_samples": 7,
+            "median": 1.5624183418086501,
+            "q1": 1.562179777994749,
+            "q3": 1.5626342899917547,
+            "iqr": 0.0004545119970056355,
+            "min": 1.561946291700717,
+            "max": 1.5629186063703657,
+            "iqr_pct_of_median": 0.0291,
+            "samples": [
+              1.562799614392994,
+              1.5619774633086032,
+              1.5624689655905155,
+              1.5629186063703657,
+              1.561946291700717,
+              1.5624183418086501,
+              1.562382092680895
+            ],
+            "ratio_of_medians": 1.562467,
+            "epistemic": "measured"
+          },
+          "method": "same builders with edge_strides = [] (E = 0): the entity records alone on both sides; the floor of the ratio for this workload"
+        },
+        "definition": "per-edge cost on each side = (bytes with edges - bytes without edges) / E; the headline ratio is a property of records + E/n edges, the no_edges ratio of the records alone"
+      },
+      "gc": {
+        "passes": 3,
+        "extended_passes": 12,
+        "warmup_passes": 2,
+        "warmup_rule": "max(2, ceil(50000 / n)) capped at 256, so short loops (small n) reach the optimizing tier before the window",
+        "pre_window": "warm-up passes, then forced full GC twice, a 5 ms wait, and one re-warm pass; the window itself contains no GC call",
+        "entities_touched_per_pass": 200000,
+        "object_graph_alloc_style": {
+          "gc_count": 0,
+          "gc_kinds": {},
+          "gc_total_ms": 0,
+          "wall_ms": 9.664,
+          "heap_used_delta_bytes": 57606416,
+          "array_buffers_delta_bytes": 0
+        },
+        "object_graph_alloc_style_extended": {
+          "gc_count": 2,
+          "gc_kinds": {
+            "incremental": 1,
+            "major": 1
+          },
+          "gc_total_ms": 3.601,
+          "wall_ms": 75.41,
+          "heap_used_delta_bytes": -8355632,
+          "array_buffers_delta_bytes": 0
+        },
+        "object_graph_inplace_style": {
+          "gc_count": 0,
+          "gc_kinds": {},
+          "gc_total_ms": 0,
+          "wall_ms": 3.015,
+          "heap_used_delta_bytes": 5320,
+          "array_buffers_delta_bytes": 0
+        },
+        "object_graph_inplace_style_extended": {
+          "gc_count": 0,
+          "gc_kinds": {},
+          "gc_total_ms": 0,
+          "wall_ms": 11.32,
+          "heap_used_delta_bytes": 1080,
+          "array_buffers_delta_bytes": 0
+        },
+        "slab": {
+          "gc_count": 0,
+          "gc_kinds": {},
+          "gc_total_ms": 0,
+          "wall_ms": 4.376,
+          "heap_used_delta_bytes": 7008,
+          "array_buffers_delta_bytes": 0
+        },
+        "slab_extended": {
+          "gc_count": 0,
+          "gc_kinds": {},
+          "gc_total_ms": 0,
+          "wall_ms": 16.011,
+          "heap_used_delta_bytes": 6944,
+          "array_buffers_delta_bytes": 0
+        },
+        "slab_zero_gc": true,
+        "growth_bytes_per_entity_pass": {
+          "object_graph_alloc_style": 96.011,
+          "object_graph_inplace_style": 0.009,
+          "object_graph_inplace_style_extended": 0,
+          "slab_window": 0.012,
+          "slab_extended_window": 0.003,
+          "definition": "(heapUsed + arrayBuffers delta across the window) / (entities x passes); negative deltas clamp to 0 for the in-place and slab loops"
+        },
+        "slab_growth_max_fraction_of_managed": 0.01,
+        "slab_growth_max_bytes_per_entity_pass": 1,
+        "slab_heap_growth_within_threshold": true,
+        "slab_heap_growth_threshold_definition": "slab window and extended window growth <= 1 % of the managed alloc-style growth, and extended-window growth <= 1 B per entity-pass in absolute terms",
+        "probe_empty_window_first": {
+          "gc_count": 0,
+          "gc_kinds": {},
+          "gc_total_ms": 0,
+          "wall_ms": 0.003,
+          "heap_used_delta_bytes": 1640,
+          "array_buffers_delta_bytes": 0,
+          "epistemic": "measured",
+          "definition": "the same gcProbe wrapper around a function that does nothing, first call after settle"
+        },
+        "probe_empty_window": {
+          "gc_count": 0,
+          "gc_kinds": {},
+          "gc_total_ms": 0,
+          "wall_ms": 0.003,
+          "heap_used_delta_bytes": 832,
+          "array_buffers_delta_bytes": 0,
+          "epistemic": "measured",
+          "definition": "the same gcProbe wrapper around a function that does nothing, second call; its heap delta is the cost of the probe itself (observer, closures, memoryUsage readings)"
+        },
+        "slab_window_growth_minus_probe_bytes": {
+          "window": 6176,
+          "extended_window": 6112,
+          "definition": "(slab window heapUsed + arrayBuffers delta) - probe_empty_window delta; reported beside the raw growth, not substituted for it; no verdict uses it",
+          "epistemic": "derivation"
+        },
+        "slab_growth_note": "residual slab-window growth is reported as measured; this harness does not identify its source (no allocation profile is taken); the probe cost measured with an empty window is reported beside it; the slab loop is DataView or Float64Array JavaScript and its allocation behaviour is established by these readings, not by construction",
+        "object_alloc_style_growth_bytes": 57606416,
+        "object_alloc_style_allocates_beyond_threshold": true,
+        "object_alloc_style_gc_observed": false,
+        "object_alloc_style_gc_observed_extended": true,
+        "object_inplace_style_gc_observed": false,
+        "gc_deferral_note": "V8 pretenures allocation sites whose objects survive, so a managed loop can grow the old generation for several passes before any GC entry appears; the extended window shows when it does",
+        "mutation_source": {
+          "object_graph_alloc_style": "mutateObjectsAlloc(s, pass) {\n    const nodes = s.nodes;\n    for (let i = 0; i < nodes.length; i++) {\n      const o = nodes[i];\n      o.payload = { x: o.payload.x + 0.5, y: o.payload.y + 0.25, z: o.payload.z - 0.125 };\n      o.timestamp += 1;\n    }\n    flipObjectEdges(s.edges, pass);\n  }",
+          "object_graph_inplace_style": "mutateObjectsInplace(s, pass) {\n    const nodes = s.nodes;\n    for (let i = 0; i < nodes.length; i++) {\n      const o = nodes[i], p = o.payload;\n      p.x += 0.5; p.y += 0.25; p.z -= 0.125;\n      o.timestamp += 1;\n    }\n    flipObjectEdges(s.edges, pass);\n  }",
+          "slab": "mutateSlab(s, pass) {\n    const view = s.view;\n    for (let i = 0; i < s.n; i++) {\n      const o = i * RECORD_BYTES;\n      view.setFloat64(o + 16, view.getFloat64(o + 16, true) + 0.5, true);\n      view.setFloat64(o + 24, view.getFloat64(o + 24, true) + 0.25, true);\n      view.setFloat64(o + 32, view.getFloat64(o + 32, true) - 0.125, true);\n      view.setFloat64(o + 8, view.getFloat64(o + 8, true) + 1, true);\n    }\n    flipSlabEdges(s, pass);\n  }"
+        }
+      },
+      "timing": {
+        "wall_ms": 2567.5,
+        "peak_rss_bytes": 190283776,
+        "settle_rounds_total": 112
+      }
+    },
+    {
+      "key": "w2_multi_agent_state",
+      "name": "Multi-Agent Conversational State",
+      "entities": 50000,
+      "edges": 100000,
+      "seed": 8194,
+      "edge_strides": [
+        1,
+        7
+      ],
+      "reps": 7,
+      "object_graph": {
+        "shape": "{ sessionId: \"agent-<i>\", state: \"idle\", turns: [{ sender, content, ts }, { sender, content, ts }], metrics: { latencyMs, tokens } } + edges [{ a, b, intact }]",
+        "heap_used_bytes": {
+          "n": 7,
+          "finite_samples": 7,
+          "median": 21199408,
+          "q1": 21199336,
+          "q3": 21205072,
+          "iqr": 5736,
+          "min": 21199336,
+          "max": 21211208,
+          "iqr_pct_of_median": 0.0271,
+          "samples": [
+            21210544,
+            21199600,
+            21211208,
+            21199336,
+            21199408,
+            21199336,
+            21199336
+          ],
+          "epistemic": "measured"
+        },
+        "array_buffers_bytes": {
+          "n": 7,
+          "finite_samples": 7,
+          "median": 0,
+          "q1": 0,
+          "q3": 0,
+          "iqr": 0,
+          "min": 0,
+          "max": 0,
+          "iqr_pct_of_median": null,
+          "samples": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "epistemic": "measured"
+        },
+        "external_bytes_median": 0,
+        "total_bytes_median": 21199408,
+        "bytes_per_entity_median": 423.99,
+        "method": "process.memoryUsage() delta (heapUsed + arrayBuffers) between a settled reading before building and a settled reading with the graph live; settled = forced full GC twice + 5 ms wait until both counters stop moving; no GC headroom applied"
+      },
+      "slab": {
+        "layout": {
+          "record_bytes": 128,
+          "fields": [
+            [
+              "session_id",
+              "ascii16",
+              0
+            ],
+            [
+              "state_enum",
+              "u8",
+              16
+            ],
+            [
+              "turn_count",
+              "u8",
+              17
+            ],
+            [
+              "turn0_ts",
+              "f64",
+              24
+            ],
+            [
+              "turn0_sender_enum",
+              "u8",
+              32
+            ],
+            [
+              "turn0_content_enum",
+              "u8",
+              33
+            ],
+            [
+              "turn1_ts",
+              "f64",
+              40
+            ],
+            [
+              "turn1_sender_enum",
+              "u8",
+              48
+            ],
+            [
+              "turn1_content_enum",
+              "u8",
+              49
+            ],
+            [
+              "latency_ms",
+              "f64",
+              56
+            ],
+            [
+              "tokens",
+              "u32",
+              64
+            ]
+          ],
+          "records_buffer": "ArrayBuffer",
+          "edge_layout": {
+            "type": "Int32Array",
+            "buffer": "ArrayBuffer",
+            "bytes_per_edge": 8,
+            "fields": [
+              "a",
+              "b"
+            ],
+            "source": "harness layout: ordinal pairs; not taken from engines/physics/runtime-fracture.mjs"
+          },
+          "object_shape": "{ sessionId: \"agent-<i>\", state: \"idle\", turns: [{ sender, content, ts }, { sender, content, ts }], metrics: { latencyMs, tokens } } + edges [{ a, b, intact }]"
+        },
+        "buffer_bytelength": {
+          "records": 6400000,
+          "edges": 800000,
+          "status": 12500,
+          "plane": 0,
+          "total": 7212500,
+          "definition": "byteLength of the record buffer, edge buffer, status bitmask and plane as allocated from the entity count and the declared layout; exact by allocation, cross-checked below against the process.memoryUsage arrayBuffers delta",
+          "epistemic": "derivation"
+        },
+        "wrapper_heap_bytes": {
+          "n": 7,
+          "finite_samples": 7,
+          "median": 616,
+          "q1": 616,
+          "q3": 2792,
+          "iqr": 2176,
+          "min": 616,
+          "max": 16152,
+          "iqr_pct_of_median": 353.2468,
+          "samples": [
+            4624,
+            960,
+            16152,
+            616,
+            616,
+            616,
+            616
+          ],
+          "epistemic": "measured"
+        },
+        "array_buffers_delta_bytes": {
+          "n": 7,
+          "finite_samples": 7,
+          "median": 7212500,
+          "q1": 7212500,
+          "q3": 7212500,
+          "iqr": 0,
+          "min": 7212500,
+          "max": 7212500,
+          "iqr_pct_of_median": 0,
+          "samples": [
+            7212500,
+            7212500,
+            7212500,
+            7212500,
+            7212500,
+            7212500,
+            7212500
+          ],
+          "epistemic": "measured"
+        },
+        "array_buffers_delta_matches_bytelength_1pct": true,
+        "total_bytes_median": 7213116,
+        "bytes_per_entity_median": 144.26,
+        "method": "buffer byteLength (record buffer + edge buffer + Uint32Array status bitmask + plane for W3) + the measured JS heap delta of their wrapper objects",
+        "layout_checks": {
+          "record_bytes": 128,
+          "is_128b_record": true,
+          "record_matches_engine_record_bytes": true,
+          "record_stride_multiple_of_alignment": true,
+          "alignment_bytes": 64,
+          "records_buffer_type": "ArrayBuffer",
+          "records_buffer_type_matches_declared": true,
+          "records_bytelength": 6400000,
+          "records_bytelength_equals_n_x_record": true,
+          "record_view_type": "DataView",
+          "field_map": {
+            "field_count": 11,
+            "payload_bytes_per_record": 50,
+            "span_bytes": 68,
+            "padding_bytes_per_record": 78,
+            "packing_efficiency": 0.3906,
+            "overlapping_fields": 0,
+            "misaligned_fields": 0,
+            "fields_fit_in_record": true,
+            "consistent": true,
+            "definition": "computed from the declared field map: payload = sum of field widths, span = max(offset + width); natural alignment = offset % width == 0 for numeric fields; consistent = no overlap, no misalignment, span <= record_bytes",
+            "epistemic": "derivation"
+          },
+          "record_round_trip_failures": 0,
+          "record_round_trip_method": "every record read back through an independent DataView at i x record_bytes + declared offset and compared with the values the builder wrote (ordinal, constants, rest == pos, unused slots zero)",
+          "edge_layout": {
+            "type": "Int32Array",
+            "buffer": "ArrayBuffer",
+            "bytes_per_edge": 8,
+            "fields": [
+              "a",
+              "b"
+            ],
+            "source": "harness layout: ordinal pairs; not taken from engines/physics/runtime-fracture.mjs"
+          },
+          "edge_buffer_type": "Int32Array",
+          "edge_buffer_type_matches_declared": true,
+          "edge_backing_buffer_type": "ArrayBuffer",
+          "edge_bytelength": 800000,
+          "edge_bytelength_equals_E_x_bytes_per_edge": true,
+          "edge_faults": 0,
+          "status_bitmask_type": "Uint32Array",
+          "status_backing_buffer_type": "ArrayBuffer",
+          "status_words": 3125,
+          "status_words_equal_ceil_E_over_32": true,
+          "base_address_alignment": "not observable from JavaScript; only record offsets within the buffer are checked",
+          "direct_mode_128b_packing": true,
+          "direct_mode_128b_packing_definition": "record_bytes of this case is 128 AND stride % 64 == 0 AND the field map is consistent (no overlap, natural alignment, fits) AND every record reads back correctly AND buffer types match the declared layout AND no edge fault AND the status bitmask is Uint32; a 4 B record (adversarial A1) or a bad field map fails it"
+        }
+      },
+      "ratio": {
+        "n": 7,
+        "finite_samples": 7,
+        "median": 2.9389983469002856,
+        "q1": 2.9389069739209503,
+        "q3": 2.9389983469002856,
+        "iqr": 0.00009137297933525801,
+        "min": 2.9343241312488137,
+        "max": 2.939008328716743,
+        "iqr_pct_of_median": 0.0031,
+        "samples": [
+          2.9389191594879067,
+          2.938894788353994,
+          2.9343241312488137,
+          2.9389983469002856,
+          2.939008328716743,
+          2.9389983469002856,
+          2.9389983469002856
+        ],
+        "ratio_of_medians": 2.939008,
+        "definition": "object_graph total bytes (measured) / slab total bytes (buffer byteLength + measured wrapper heap) per repetition; median, q1, q3, iqr over repetitions",
+        "epistemic": "measured"
+      },
+      "ratio_memory_usage_basis": {
+        "median": 2.9389983469002856,
+        "iqr_pct_of_median": 0.0031,
+        "finite_samples": 7,
+        "definition": "object bytes / (measured arrayBuffers delta + measured wrapper heap delta): the same ratio with the slab side read from process.memoryUsage only; reported for comparison, not the primary",
+        "epistemic": "measured"
+      },
+      "model_applied": {
+        "ratio_with_gc_headroom": 3.9187,
+        "definition": "measured median ratio / (1 - alpha_gc); this is the model applied to the measurement, not a measurement",
+        "epistemic": "model"
+      },
+      "measured_parameters": {
+        "payload_S_bytes": {
+          "value": 2500000,
+          "definition": "S = n x payload_bytes_per_record (sum of the declared field widths, computed from the field map) + plane byteLength; the common denominator of beta, gamma and f; no instrument reading enters S",
+          "epistemic": "derivation"
+        },
+        "beta": {
+          "value": 8.4798,
+          "definition": "measured object-graph bytes (heapUsed + arrayBuffers delta, edge objects included) / S",
+          "epistemic": "derivation",
+          "numerator_epistemic": "measured"
+        },
+        "gamma_layout": {
+          "value": 2.56,
+          "definition": "(record buffer + plane byteLength) / S = record_bytes / payload_bytes_per_record for a planeless workload; fixed by the declared field map and the 128 B stride, not by any instrument",
+          "epistemic": "derivation"
+        },
+        "f_edges_and_bitmask": {
+          "value": 0.325,
+          "definition": "(edge buffer + status bitmask byteLength) / S; depends on the harness-chosen edges per entity (edge_strides) and the edge layout, so it is a choice, not a measurement of the engine",
+          "epistemic": "derivation"
+        },
+        "f_wrapper": {
+          "value": 0.000246,
+          "definition": "measured JS heap delta of the buffer wrapper objects / S",
+          "epistemic": "derivation",
+          "numerator_epistemic": "measured"
+        },
+        "f_total": {
+          "value": 0.3252,
+          "definition": "(slab total bytes - record and plane byteLength) / S = f_edges_and_bitmask + f_wrapper",
+          "epistemic": "derivation"
+        },
+        "alpha_gc": {
+          "value": 0.25,
+          "definition": "GC headroom reserve; a model parameter, not measured by this harness",
+          "epistemic": "declared"
+        },
+        "identity_beta_over_gamma_plus_f": {
+          "value": 2.939008,
+          "definition": "beta / (gamma + f) with the values above; equals object bytes / slab bytes by construction because all three share the denominator S; an algebraic identity, not a test, and no verdict depends on it",
+          "epistemic": "derivation"
+        },
+        "model_declared": {
+          "beta": 3.5,
+          "gamma": 1,
+          "f": 0.126,
+          "epistemic": "declared"
+        },
+        "gap_declared_vs_measured": {
+          "beta_pct": 142.2789,
+          "gamma_pct": 156,
+          "f_pct": 158.1321,
+          "band_pct": 10,
+          "definition": "|derived value - declared model value| / declared x 100 per parameter",
+          "epistemic": "derivation"
+        },
+        "declared_parameters_within_band": false
+      },
+      "edge_decomposition": {
+        "edges_per_entity": {
+          "value": 2,
+          "definition": "E / n set by edge_strides; a harness parameter",
+          "epistemic": "declared"
+        },
+        "object_bytes_per_edge": {
+          "value": 56,
+          "definition": "(measured object bytes with edges - measured object bytes without edges) / E",
+          "epistemic": "derivation"
+        },
+        "slab_bytes_per_edge": {
+          "value": 8.13,
+          "definition": "(slab bytes with edges - slab bytes without edges) / E",
+          "epistemic": "derivation"
+        },
+        "edge_share_of_object_bytes_pct": {
+          "value": 26.42,
+          "epistemic": "derivation"
+        },
+        "edge_share_of_slab_bytes_pct": {
+          "value": 11.26,
+          "epistemic": "derivation"
+        },
+        "no_edges": {
+          "object_bytes_median": 15599320,
+          "slab_bytes_median": 6400616,
+          "ratio": {
+            "n": 7,
+            "finite_samples": 7,
+            "median": 2.4371591734295572,
+            "q1": 2.4371591734295572,
+            "q3": 2.4371591734295572,
+            "iqr": 0,
+            "min": 2.4371382469875527,
+            "max": 2.4371591734295572,
+            "iqr_pct_of_median": 0,
+            "samples": [
+              2.4371382469875527,
+              2.4371591734295572,
+              2.4371591734295572,
+              2.4371591734295572,
+              2.4371591734295572,
+              2.4371591734295572,
+              2.4371591734295572
+            ],
+            "ratio_of_medians": 2.437159,
+            "epistemic": "measured"
+          },
+          "method": "same builders with edge_strides = [] (E = 0): the entity records alone on both sides; the floor of the ratio for this workload"
+        },
+        "definition": "per-edge cost on each side = (bytes with edges - bytes without edges) / E; the headline ratio is a property of records + E/n edges, the no_edges ratio of the records alone"
+      },
+      "gc": {
+        "passes": 3,
+        "extended_passes": 12,
+        "warmup_passes": 2,
+        "warmup_rule": "max(2, ceil(50000 / n)) capped at 256, so short loops (small n) reach the optimizing tier before the window",
+        "pre_window": "warm-up passes, then forced full GC twice, a 5 ms wait, and one re-warm pass; the window itself contains no GC call",
+        "entities_touched_per_pass": 50000,
+        "object_graph_alloc_style": {
+          "gc_count": 0,
+          "gc_kinds": {},
+          "gc_total_ms": 0,
+          "wall_ms": 3.458,
+          "heap_used_delta_bytes": 15608296,
+          "array_buffers_delta_bytes": 0
+        },
+        "object_graph_alloc_style_extended": {
+          "gc_count": 0,
+          "gc_kinds": {},
+          "gc_total_ms": 0,
+          "wall_ms": 10.634,
+          "heap_used_delta_bytes": 62400632,
+          "array_buffers_delta_bytes": 0
+        },
+        "object_graph_inplace_style": {
+          "gc_count": 0,
+          "gc_kinds": {},
+          "gc_total_ms": 0,
+          "wall_ms": 1.143,
+          "heap_used_delta_bytes": 6920,
+          "array_buffers_delta_bytes": 0
+        },
+        "object_graph_inplace_style_extended": {
+          "gc_count": 0,
+          "gc_kinds": {},
+          "gc_total_ms": 0,
+          "wall_ms": 4.271,
+          "heap_used_delta_bytes": 632,
+          "array_buffers_delta_bytes": 0
+        },
+        "slab": {
+          "gc_count": 0,
+          "gc_kinds": {},
+          "gc_total_ms": 0,
+          "wall_ms": 0.718,
+          "heap_used_delta_bytes": 776,
+          "array_buffers_delta_bytes": 0
+        },
+        "slab_extended": {
+          "gc_count": 0,
+          "gc_kinds": {},
+          "gc_total_ms": 0,
+          "wall_ms": 3.044,
+          "heap_used_delta_bytes": 8736,
+          "array_buffers_delta_bytes": 0
+        },
+        "slab_zero_gc": true,
+        "growth_bytes_per_entity_pass": {
+          "object_graph_alloc_style": 104.055,
+          "object_graph_inplace_style": 0.046,
+          "object_graph_inplace_style_extended": 0.001,
+          "slab_window": 0.005,
+          "slab_extended_window": 0.015,
+          "definition": "(heapUsed + arrayBuffers delta across the window) / (entities x passes); negative deltas clamp to 0 for the in-place and slab loops"
+        },
+        "slab_growth_max_fraction_of_managed": 0.01,
+        "slab_growth_max_bytes_per_entity_pass": 1,
+        "slab_heap_growth_within_threshold": true,
+        "slab_heap_growth_threshold_definition": "slab window and extended window growth <= 1 % of the managed alloc-style growth, and extended-window growth <= 1 B per entity-pass in absolute terms",
+        "probe_empty_window_first": {
+          "gc_count": 0,
+          "gc_kinds": {},
+          "gc_total_ms": 0,
+          "wall_ms": 0,
+          "heap_used_delta_bytes": 2160,
+          "array_buffers_delta_bytes": 0,
+          "epistemic": "measured",
+          "definition": "the same gcProbe wrapper around a function that does nothing, first call after settle"
+        },
+        "probe_empty_window": {
+          "gc_count": 0,
+          "gc_kinds": {},
+          "gc_total_ms": 0,
+          "wall_ms": 0,
+          "heap_used_delta_bytes": 632,
+          "array_buffers_delta_bytes": 0,
+          "epistemic": "measured",
+          "definition": "the same gcProbe wrapper around a function that does nothing, second call; its heap delta is the cost of the probe itself (observer, closures, memoryUsage readings)"
+        },
+        "slab_window_growth_minus_probe_bytes": {
+          "window": 144,
+          "extended_window": 8104,
+          "definition": "(slab window heapUsed + arrayBuffers delta) - probe_empty_window delta; reported beside the raw growth, not substituted for it; no verdict uses it",
+          "epistemic": "derivation"
+        },
+        "slab_growth_note": "residual slab-window growth is reported as measured; this harness does not identify its source (no allocation profile is taken); the probe cost measured with an empty window is reported beside it; the slab loop is DataView or Float64Array JavaScript and its allocation behaviour is established by these readings, not by construction",
+        "object_alloc_style_growth_bytes": 15608296,
+        "object_alloc_style_allocates_beyond_threshold": true,
+        "object_alloc_style_gc_observed": false,
+        "object_alloc_style_gc_observed_extended": false,
+        "object_inplace_style_gc_observed": false,
+        "gc_deferral_note": "V8 pretenures allocation sites whose objects survive, so a managed loop can grow the old generation for several passes before any GC entry appears; the extended window shows when it does",
+        "mutation_source": {
+          "object_graph_alloc_style": "mutateObjectsAlloc(s, pass) {\n    const nodes = s.nodes;\n    for (let i = 0; i < nodes.length; i++) {\n      const o = nodes[i];\n      o.turns.push({ sender: 'user', content: 'exec', ts: o.turns[1].ts + 1 });\n      o.turns.shift();\n      o.metrics = { latencyMs: o.metrics.latencyMs * 0.5 + 1, tokens: o.metrics.tokens + 1 };\n    }\n    flipObjectEdges(s.edges, pass);\n  }",
+          "object_graph_inplace_style": "mutateObjectsInplace(s, pass) {\n    const nodes = s.nodes;\n    for (let i = 0; i < nodes.length; i++) {\n      const o = nodes[i], t0 = o.turns[0], t1 = o.turns[1];\n      t0.sender = t1.sender; t0.content = t1.content; t0.ts = t1.ts;\n      t1.sender = 'user'; t1.content = 'exec'; t1.ts = t0.ts + 1;\n      o.metrics.latencyMs = o.metrics.latencyMs * 0.5 + 1;\n      o.metrics.tokens += 1;\n    }\n    flipObjectEdges(s.edges, pass);\n  }",
+          "slab": "mutateSlab(s, pass) {\n    const view = s.view;\n    for (let i = 0; i < s.n; i++) {\n      const o = i * RECORD_BYTES;\n      const ts1 = view.getFloat64(o + 40, true);\n      view.setFloat64(o + 24, ts1, true);\n      view.setUint8(o + 32, view.getUint8(o + 48));\n      view.setUint8(o + 33, view.getUint8(o + 49));\n      view.setFloat64(o + 40, ts1 + 1, true);\n      view.setUint8(o + 48, 1);\n      view.setUint8(o + 49, 1);\n      view.setFloat64(o + 56, view.getFloat64(o + 56, true) * 0.5 + 1, true);\n      view.setUint32(o + 64, view.getUint32(o + 64, true) + 1, true);\n    }\n    flipSlabEdges(s, pass);\n  }"
+        }
+      },
+      "timing": {
+        "wall_ms": 1519,
+        "peak_rss_bytes": 451903488,
+        "settle_rounds_total": 112
+      }
+    },
+    {
+      "key": "w3_video_pipeline",
+      "name": "Video Pipeline Buffers & Metadata",
+      "entities": 350,
+      "edges": 700,
+      "seed": 12291,
+      "edge_strides": [
+        1,
+        7
+      ],
+      "reps": 7,
+      "object_graph": {
+        "shape": "{ frameNumber, pts, dimensions: { w, h }, layers: [{ type }, { type }], chunk: Buffer.alloc(65536) } + edges [{ a, b, intact }]",
+        "heap_used_bytes": {
+          "n": 7,
+          "finite_samples": 7,
+          "median": 193336,
+          "q1": 193336,
+          "q3": 195204,
+          "iqr": 1868,
+          "min": 189776,
+          "max": 204016,
+          "iqr_pct_of_median": 0.9662,
+          "samples": [
+            204016,
+            189776,
+            193336,
+            193336,
+            197072,
+            193336,
+            193336
+          ],
+          "epistemic": "measured"
+        },
+        "array_buffers_bytes": {
+          "n": 7,
+          "finite_samples": 7,
+          "median": 22937600,
+          "q1": 22937600,
+          "q3": 22937600,
+          "iqr": 0,
+          "min": 22937600,
+          "max": 22937600,
+          "iqr_pct_of_median": 0,
+          "samples": [
+            22937600,
+            22937600,
+            22937600,
+            22937600,
+            22937600,
+            22937600,
+            22937600
+          ],
+          "epistemic": "measured"
+        },
+        "external_bytes_median": 22937600,
+        "total_bytes_median": 23130936,
+        "bytes_per_entity_median": 66088.39,
+        "method": "process.memoryUsage() delta (heapUsed + arrayBuffers) between a settled reading before building and a settled reading with the graph live; settled = forced full GC twice + 5 ms wait until both counters stop moving; no GC headroom applied"
+      },
+      "slab": {
+        "layout": {
+          "record_bytes": 128,
+          "fields": [
+            [
+              "frame_number",
+              "u32",
+              0
+            ],
+            [
+              "pts",
+              "f64",
+              8
+            ],
+            [
+              "width",
+              "u16",
+              16
+            ],
+            [
+              "height",
+              "u16",
+              18
+            ],
+            [
+              "layer_count",
+              "u8",
+              20
+            ],
+            [
+              "layer0_enum",
+              "u8",
+              21
+            ],
+            [
+              "layer1_enum",
+              "u8",
+              22
+            ],
+            [
+              "chunk_index",
+              "u32",
+              24
+            ],
+            [
+              "chunk_bytes",
+              "u32",
+              28
+            ]
+          ],
+          "plane_bytes_per_record": 65536,
+          "records_buffer": "ArrayBuffer",
+          "edge_layout": {
+            "type": "Int32Array",
+            "buffer": "ArrayBuffer",
+            "bytes_per_edge": 8,
+            "fields": [
+              "a",
+              "b"
+            ],
+            "source": "harness layout: ordinal pairs; not taken from engines/physics/runtime-fracture.mjs"
+          },
+          "object_shape": "{ frameNumber, pts, dimensions: { w, h }, layers: [{ type }, { type }], chunk: Buffer.alloc(65536) } + edges [{ a, b, intact }]"
+        },
+        "buffer_bytelength": {
+          "records": 44800,
+          "edges": 5600,
+          "status": 88,
+          "plane": 22937600,
+          "total": 22988088,
+          "definition": "byteLength of the record buffer, edge buffer, status bitmask and plane as allocated from the entity count and the declared layout; exact by allocation, cross-checked below against the process.memoryUsage arrayBuffers delta",
+          "epistemic": "derivation"
+        },
+        "wrapper_heap_bytes": {
+          "n": 7,
+          "finite_samples": 7,
+          "median": 808,
+          "q1": 808,
+          "q3": 2876,
+          "iqr": 2068,
+          "min": 808,
+          "max": 13440,
+          "iqr_pct_of_median": 255.9406,
+          "samples": [
+            13440,
+            1784,
+            3968,
+            808,
+            808,
+            808,
+            808
+          ],
+          "epistemic": "measured"
+        },
+        "array_buffers_delta_bytes": {
+          "n": 7,
+          "finite_samples": 7,
+          "median": 22988088,
+          "q1": 22988088,
+          "q3": 22988088,
+          "iqr": 0,
+          "min": 22988088,
+          "max": 22988088,
+          "iqr_pct_of_median": 0,
+          "samples": [
+            22988088,
+            22988088,
+            22988088,
+            22988088,
+            22988088,
+            22988088,
+            22988088
+          ],
+          "epistemic": "measured"
+        },
+        "array_buffers_delta_matches_bytelength_1pct": true,
+        "total_bytes_median": 22988896,
+        "bytes_per_entity_median": 65682.56,
+        "method": "buffer byteLength (record buffer + edge buffer + Uint32Array status bitmask + plane for W3) + the measured JS heap delta of their wrapper objects",
+        "layout_checks": {
+          "record_bytes": 128,
+          "is_128b_record": true,
+          "record_matches_engine_record_bytes": true,
+          "record_stride_multiple_of_alignment": true,
+          "alignment_bytes": 64,
+          "records_buffer_type": "ArrayBuffer",
+          "records_buffer_type_matches_declared": true,
+          "records_bytelength": 44800,
+          "records_bytelength_equals_n_x_record": true,
+          "record_view_type": "DataView",
+          "field_map": {
+            "field_count": 9,
+            "payload_bytes_per_record": 27,
+            "span_bytes": 32,
+            "padding_bytes_per_record": 101,
+            "packing_efficiency": 0.2109,
+            "overlapping_fields": 0,
+            "misaligned_fields": 0,
+            "fields_fit_in_record": true,
+            "consistent": true,
+            "definition": "computed from the declared field map: payload = sum of field widths, span = max(offset + width); natural alignment = offset % width == 0 for numeric fields; consistent = no overlap, no misalignment, span <= record_bytes",
+            "epistemic": "derivation"
+          },
+          "record_round_trip_failures": 0,
+          "record_round_trip_method": "every record read back through an independent DataView at i x record_bytes + declared offset and compared with the values the builder wrote (ordinal, constants, rest == pos, unused slots zero)",
+          "edge_layout": {
+            "type": "Int32Array",
+            "buffer": "ArrayBuffer",
+            "bytes_per_edge": 8,
+            "fields": [
+              "a",
+              "b"
+            ],
+            "source": "harness layout: ordinal pairs; not taken from engines/physics/runtime-fracture.mjs"
+          },
+          "edge_buffer_type": "Int32Array",
+          "edge_buffer_type_matches_declared": true,
+          "edge_backing_buffer_type": "ArrayBuffer",
+          "edge_bytelength": 5600,
+          "edge_bytelength_equals_E_x_bytes_per_edge": true,
+          "edge_faults": 0,
+          "status_bitmask_type": "Uint32Array",
+          "status_backing_buffer_type": "ArrayBuffer",
+          "status_words": 22,
+          "status_words_equal_ceil_E_over_32": true,
+          "base_address_alignment": "not observable from JavaScript; only record offsets within the buffer are checked",
+          "direct_mode_128b_packing": true,
+          "direct_mode_128b_packing_definition": "record_bytes of this case is 128 AND stride % 64 == 0 AND the field map is consistent (no overlap, natural alignment, fits) AND every record reads back correctly AND buffer types match the declared layout AND no edge fault AND the status bitmask is Uint32; a 4 B record (adversarial A1) or a bad field map fails it"
+        }
+      },
+      "ratio": {
+        "n": 7,
+        "finite_samples": 7,
+        "median": 1.0061786351114903,
+        "q1": 1.0060653625743523,
+        "q3": 1.0061786351114903,
+        "iqr": 0.00011327253713799834,
+        "min": 1.005981068533135,
+        "max": 1.0063411483526656,
+        "iqr_pct_of_median": 0.0113,
+        "samples": [
+          1.0060903779957575,
+          1.005981068533135,
+          1.006040347152947,
+          1.0061786351114903,
+          1.0063411483526656,
+          1.0061786351114903,
+          1.0061786351114903
+        ],
+        "ratio_of_medians": 1.006179,
+        "definition": "object_graph total bytes (measured) / slab total bytes (buffer byteLength + measured wrapper heap) per repetition; median, q1, q3, iqr over repetitions",
+        "epistemic": "measured"
+      },
+      "ratio_memory_usage_basis": {
+        "median": 1.0061786351114903,
+        "iqr_pct_of_median": 0.0113,
+        "finite_samples": 7,
+        "definition": "object bytes / (measured arrayBuffers delta + measured wrapper heap delta): the same ratio with the slab side read from process.memoryUsage only; reported for comparison, not the primary",
+        "epistemic": "measured"
+      },
+      "model_applied": {
+        "ratio_with_gc_headroom": 1.3416,
+        "definition": "measured median ratio / (1 - alpha_gc); this is the model applied to the measurement, not a measurement",
+        "epistemic": "model"
+      },
+      "measured_parameters": {
+        "payload_S_bytes": {
+          "value": 22947050,
+          "definition": "S = n x payload_bytes_per_record (sum of the declared field widths, computed from the field map) + plane byteLength; the common denominator of beta, gamma and f; no instrument reading enters S",
+          "epistemic": "derivation"
+        },
+        "beta": {
+          "value": 1.008,
+          "definition": "measured object-graph bytes (heapUsed + arrayBuffers delta, edge objects included) / S",
+          "epistemic": "derivation",
+          "numerator_epistemic": "measured"
+        },
+        "gamma_layout": {
+          "value": 1.0015,
+          "definition": "(record buffer + plane byteLength) / S = record_bytes / payload_bytes_per_record for a planeless workload; fixed by the declared field map and the 128 B stride, not by any instrument",
+          "epistemic": "derivation"
+        },
+        "f_edges_and_bitmask": {
+          "value": 0.0002,
+          "definition": "(edge buffer + status bitmask byteLength) / S; depends on the harness-chosen edges per entity (edge_strides) and the edge layout, so it is a choice, not a measurement of the engine",
+          "epistemic": "derivation"
+        },
+        "f_wrapper": {
+          "value": 0.000035,
+          "definition": "measured JS heap delta of the buffer wrapper objects / S",
+          "epistemic": "derivation",
+          "numerator_epistemic": "measured"
+        },
+        "f_total": {
+          "value": 0.0003,
+          "definition": "(slab total bytes - record and plane byteLength) / S = f_edges_and_bitmask + f_wrapper",
+          "epistemic": "derivation"
+        },
+        "alpha_gc": {
+          "value": 0.25,
+          "definition": "GC headroom reserve; a model parameter, not measured by this harness",
+          "epistemic": "declared"
+        },
+        "identity_beta_over_gamma_plus_f": {
+          "value": 1.006179,
+          "definition": "beta / (gamma + f) with the values above; equals object bytes / slab bytes by construction because all three share the denominator S; an algebraic identity, not a test, and no verdict depends on it",
+          "epistemic": "derivation"
+        },
+        "model_declared": {
+          "beta": 3.5,
+          "gamma": 1,
+          "f": 0.126,
+          "epistemic": "declared"
+        },
+        "gap_declared_vs_measured": {
+          "beta_pct": 71.1996,
+          "gamma_pct": 0.1541,
+          "f_pct": 99.7753,
+          "band_pct": 10,
+          "definition": "|derived value - declared model value| / declared x 100 per parameter",
+          "epistemic": "derivation"
+        },
+        "declared_parameters_within_band": false
+      },
+      "edge_decomposition": {
+        "edges_per_entity": {
+          "value": 2,
+          "definition": "E / n set by edge_strides; a harness parameter",
+          "epistemic": "declared"
+        },
+        "object_bytes_per_edge": {
+          "value": 56.02,
+          "definition": "(measured object bytes with edges - measured object bytes without edges) / E",
+          "epistemic": "derivation"
+        },
+        "slab_bytes_per_edge": {
+          "value": 8.13,
+          "definition": "(slab bytes with edges - slab bytes without edges) / E",
+          "epistemic": "derivation"
+        },
+        "edge_share_of_object_bytes_pct": {
+          "value": 0.17,
+          "epistemic": "derivation"
+        },
+        "edge_share_of_slab_bytes_pct": {
+          "value": 0.02,
+          "epistemic": "derivation"
+        },
+        "no_edges": {
+          "object_bytes_median": 23091720,
+          "slab_bytes_median": 22983208,
+          "ratio": {
+            "n": 7,
+            "finite_samples": 7,
+            "median": 1.0047213600468656,
+            "q1": 1.0047213600468656,
+            "q3": 1.0047904375211534,
+            "iqr": 0.00006907747428774869,
+            "min": 1.0047213600468656,
+            "max": 1.005164466161556,
+            "iqr_pct_of_median": 0.0069,
+            "samples": [
+              1.004725504112365,
+              1.005164466161556,
+              1.0047213600468656,
+              1.0048553709299415,
+              1.0047213600468656,
+              1.0047213600468656,
+              1.0047213600468656
+            ],
+            "ratio_of_medians": 1.004721,
+            "epistemic": "measured"
+          },
+          "method": "same builders with edge_strides = [] (E = 0): the entity records alone on both sides; the floor of the ratio for this workload"
+        },
+        "definition": "per-edge cost on each side = (bytes with edges - bytes without edges) / E; the headline ratio is a property of records + E/n edges, the no_edges ratio of the records alone"
+      },
+      "gc": {
+        "passes": 3,
+        "extended_passes": 12,
+        "warmup_passes": 143,
+        "warmup_rule": "max(2, ceil(50000 / n)) capped at 256, so short loops (small n) reach the optimizing tier before the window",
+        "pre_window": "warm-up passes, then forced full GC twice, a 5 ms wait, and one re-warm pass; the window itself contains no GC call",
+        "entities_touched_per_pass": 350,
+        "object_graph_alloc_style": {
+          "gc_count": 4,
+          "gc_kinds": {
+            "minor": 4
+          },
+          "gc_total_ms": 0.561,
+          "wall_ms": 1.804,
+          "heap_used_delta_bytes": 129760,
+          "array_buffers_delta_bytes": 26345472
+        },
+        "object_graph_alloc_style_extended": {
+          "gc_count": 17,
+          "gc_kinds": {
+            "minor": 13,
+            "incremental": 2,
+            "major": 2
+          },
+          "gc_total_ms": 2.945,
+          "wall_ms": 8.754,
+          "heap_used_delta_bytes": -92064,
+          "array_buffers_delta_bytes": 8650752
+        },
+        "object_graph_inplace_style": {
+          "gc_count": 0,
+          "gc_kinds": {},
+          "gc_total_ms": 0,
+          "wall_ms": 0.687,
+          "heap_used_delta_bytes": 824,
+          "array_buffers_delta_bytes": 0
+        },
+        "object_graph_inplace_style_extended": {
+          "gc_count": 0,
+          "gc_kinds": {},
+          "gc_total_ms": 0,
+          "wall_ms": 2.538,
+          "heap_used_delta_bytes": 488,
+          "array_buffers_delta_bytes": 0
+        },
+        "slab": {
+          "gc_count": 0,
+          "gc_kinds": {},
+          "gc_total_ms": 0,
+          "wall_ms": 0.71,
+          "heap_used_delta_bytes": 824,
+          "array_buffers_delta_bytes": 0
+        },
+        "slab_extended": {
+          "gc_count": 0,
+          "gc_kinds": {},
+          "gc_total_ms": 0,
+          "wall_ms": 2.603,
+          "heap_used_delta_bytes": 488,
+          "array_buffers_delta_bytes": 0
+        },
+        "slab_zero_gc": true,
+        "growth_bytes_per_entity_pass": {
+          "object_graph_alloc_style": 25214.507,
+          "object_graph_inplace_style": 0.785,
+          "object_graph_inplace_style_extended": 0.116,
+          "slab_window": 0.785,
+          "slab_extended_window": 0.116,
+          "definition": "(heapUsed + arrayBuffers delta across the window) / (entities x passes); negative deltas clamp to 0 for the in-place and slab loops"
+        },
+        "slab_growth_max_fraction_of_managed": 0.01,
+        "slab_growth_max_bytes_per_entity_pass": 1,
+        "slab_heap_growth_within_threshold": true,
+        "slab_heap_growth_threshold_definition": "slab window and extended window growth <= 1 % of the managed alloc-style growth, and extended-window growth <= 1 B per entity-pass in absolute terms",
+        "probe_empty_window_first": {
+          "gc_count": 0,
+          "gc_kinds": {},
+          "gc_total_ms": 0,
+          "wall_ms": 0.001,
+          "heap_used_delta_bytes": 632,
+          "array_buffers_delta_bytes": 0,
+          "epistemic": "measured",
+          "definition": "the same gcProbe wrapper around a function that does nothing, first call after settle"
+        },
+        "probe_empty_window": {
+          "gc_count": 0,
+          "gc_kinds": {},
+          "gc_total_ms": 0,
+          "wall_ms": 0,
+          "heap_used_delta_bytes": 632,
+          "array_buffers_delta_bytes": 0,
+          "epistemic": "measured",
+          "definition": "the same gcProbe wrapper around a function that does nothing, second call; its heap delta is the cost of the probe itself (observer, closures, memoryUsage readings)"
+        },
+        "slab_window_growth_minus_probe_bytes": {
+          "window": 192,
+          "extended_window": -144,
+          "definition": "(slab window heapUsed + arrayBuffers delta) - probe_empty_window delta; reported beside the raw growth, not substituted for it; no verdict uses it",
+          "epistemic": "derivation"
+        },
+        "slab_growth_note": "residual slab-window growth is reported as measured; this harness does not identify its source (no allocation profile is taken); the probe cost measured with an empty window is reported beside it; the slab loop is DataView or Float64Array JavaScript and its allocation behaviour is established by these readings, not by construction",
+        "object_alloc_style_growth_bytes": 26475232,
+        "object_alloc_style_allocates_beyond_threshold": true,
+        "object_alloc_style_gc_observed": true,
+        "object_alloc_style_gc_observed_extended": true,
+        "object_inplace_style_gc_observed": false,
+        "gc_deferral_note": "V8 pretenures allocation sites whose objects survive, so a managed loop can grow the old generation for several passes before any GC entry appears; the extended window shows when it does",
+        "mutation_source": {
+          "object_graph_alloc_style": "mutateObjectsAlloc(s, pass) {\n    const nodes = s.nodes;\n    for (let i = 0; i < nodes.length; i++) {\n      const f = nodes[i];\n      f.chunk = Buffer.alloc(CHUNK_BYTES, (pass + i) & 255);\n      f.pts += 8.333;\n    }\n    flipObjectEdges(s.edges, pass);\n  }",
+          "object_graph_inplace_style": "mutateObjectsInplace(s, pass) {\n    const nodes = s.nodes;\n    for (let i = 0; i < nodes.length; i++) {\n      const f = nodes[i];\n      f.chunk.fill((pass + i) & 255);\n      f.pts += 8.333;\n    }\n    flipObjectEdges(s.edges, pass);\n  }",
+          "slab": "mutateSlab(s, pass) {\n    const view = s.view, planeView = s.planeView;\n    for (let i = 0; i < s.n; i++) {\n      const o = i * RECORD_BYTES;\n      planeView.fill((pass + i) & 255, i * CHUNK_BYTES, (i + 1) * CHUNK_BYTES);\n      view.setFloat64(o + 8, view.getFloat64(o + 8, true) + 8.333, true);\n    }\n    flipSlabEdges(s, pass);\n  }"
+        }
+      },
+      "timing": {
+        "wall_ms": 1247.3,
+        "peak_rss_bytes": 474349568,
+        "settle_rounds_total": 112
+      }
+    },
+    {
+      "key": "w4_physics_xpbd_particles",
+      "name": "Physics State (XPBD Particles)",
+      "entities": 100000,
+      "edges": 200000,
+      "seed": 16388,
+      "edge_strides": [
+        1,
+        7
+      ],
+      "reps": 7,
+      "object_graph": {
+        "shape": "{ pos: [x, y, z], prevPos: [x, y, z], vel: [x, y, z], invMass, nodalVol, rest: [x, y, z] } + edges [{ a, b, L0, alpha, intact }]",
+        "heap_used_bytes": {
+          "n": 7,
+          "finite_samples": 7,
+          "median": 59200248,
+          "q1": 59200128,
+          "q3": 59200616,
+          "iqr": 488,
+          "min": 59179288,
+          "max": 59211696,
+          "iqr_pct_of_median": 0.0008,
+          "samples": [
+            59211696,
+            59200736,
+            59200248,
+            59200120,
+            59200136,
+            59179288,
+            59200496
+          ],
+          "epistemic": "measured"
+        },
+        "array_buffers_bytes": {
+          "n": 7,
+          "finite_samples": 7,
+          "median": 0,
+          "q1": 0,
+          "q3": 0,
+          "iqr": 0,
+          "min": 0,
+          "max": 0,
+          "iqr_pct_of_median": null,
+          "samples": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "epistemic": "measured"
+        },
+        "external_bytes_median": 0,
+        "total_bytes_median": 59200248,
+        "bytes_per_entity_median": 592,
+        "method": "process.memoryUsage() delta (heapUsed + arrayBuffers) between a settled reading before building and a settled reading with the graph live; settled = forced full GC twice + 5 ms wait until both counters stop moving; no GC headroom applied"
+      },
+      "slab": {
+        "layout": {
+          "record_bytes": 128,
+          "stride_doubles": 16,
+          "slots": {
+            "pos": [
+              0,
+              1,
+              2
+            ],
+            "invMass": 3,
+            "prev": [
+              4,
+              5,
+              6
+            ],
+            "vel": [
+              8,
+              9,
+              10
+            ],
+            "nodalVol": 11,
+            "rest": [
+              12,
+              13,
+              14
+            ],
+            "unused": [
+              7,
+              15
+            ]
+          },
+          "slots_source": "engines/physics/runtime-fracture.mjs header comment and accumulateRange/integrate offsets: pos 0-2, invMass 3, prev 4-6, vel 8-10, nodalVol 11, rest 12-14; slots 7 and 15 are not read or written by the engine",
+          "fields": [
+            [
+              "pos_x",
+              "f64",
+              0
+            ],
+            [
+              "pos_y",
+              "f64",
+              8
+            ],
+            [
+              "pos_z",
+              "f64",
+              16
+            ],
+            [
+              "inv_mass",
+              "f64",
+              24
+            ],
+            [
+              "prev_x",
+              "f64",
+              32
+            ],
+            [
+              "prev_y",
+              "f64",
+              40
+            ],
+            [
+              "prev_z",
+              "f64",
+              48
+            ],
+            [
+              "vel_x",
+              "f64",
+              64
+            ],
+            [
+              "vel_y",
+              "f64",
+              72
+            ],
+            [
+              "vel_z",
+              "f64",
+              80
+            ],
+            [
+              "nodal_vol",
+              "f64",
+              88
+            ],
+            [
+              "rest_x",
+              "f64",
+              96
+            ],
+            [
+              "rest_y",
+              "f64",
+              104
+            ],
+            [
+              "rest_z",
+              "f64",
+              112
+            ]
+          ],
+          "records_buffer": "SharedArrayBuffer",
+          "edge_layout": {
+            "type": "Float64Array",
+            "buffer": "SharedArrayBuffer",
+            "bytes_per_edge": 32,
+            "fields": [
+              "a",
+              "b",
+              "L0",
+              "alpha"
+            ],
+            "source": "engines/physics/runtime-fracture.mjs edgeParams: Float64Array(SharedArrayBuffer(E x 4 x 8)) holding endpoint ordinals, rest length and compliance"
+          },
+          "edge_alpha": {
+            "expression": "alpha = L0^2 / (tet_modulus x tet_volume) / EDGE_CAL",
+            "tet_modulus": 25000,
+            "tet_volume": 0.16666666666666666,
+            "edge_cal": 8,
+            "source": "engines/physics/runtime-fracture.mjs createFractureWorld: alpha = L0*L0 / (Em*Vm) / EDGE_CAL with EDGE_CAL 8; Em and Vm here are declared from the RF-5 test material (mu = lambda = 1e4, unit tet volume 1/6), not from a mesh"
+          },
+          "object_shape": "{ pos: [x, y, z], prevPos: [x, y, z], vel: [x, y, z], invMass, nodalVol, rest: [x, y, z] } + edges [{ a, b, L0, alpha, intact }]"
+        },
+        "buffer_bytelength": {
+          "records": 12800000,
+          "edges": 6400000,
+          "status": 25000,
+          "plane": 0,
+          "total": 19225000,
+          "definition": "byteLength of the record buffer, edge buffer, status bitmask and plane as allocated from the entity count and the declared layout; exact by allocation, cross-checked below against the process.memoryUsage arrayBuffers delta",
+          "epistemic": "derivation"
+        },
+        "wrapper_heap_bytes": {
+          "n": 7,
+          "finite_samples": 7,
+          "median": 728,
+          "q1": 632,
+          "q3": 4552,
+          "iqr": 3920,
+          "min": 632,
+          "max": 8520,
+          "iqr_pct_of_median": 538.4615,
+          "samples": [
+            8520,
+            976,
+            8128,
+            632,
+            632,
+            728,
+            632
+          ],
+          "epistemic": "measured"
+        },
+        "array_buffers_delta_bytes": {
+          "n": 7,
+          "finite_samples": 7,
+          "median": 19225000,
+          "q1": 19225000,
+          "q3": 19225000,
+          "iqr": 0,
+          "min": 19225000,
+          "max": 19225000,
+          "iqr_pct_of_median": 0,
+          "samples": [
+            19225000,
+            19225000,
+            19225000,
+            19225000,
+            19225000,
+            19225000,
+            19225000
+          ],
+          "epistemic": "measured"
+        },
+        "array_buffers_delta_matches_bytelength_1pct": true,
+        "total_bytes_median": 19225728,
+        "bytes_per_entity_median": 192.26,
+        "method": "buffer byteLength (record buffer + edge buffer + Uint32Array status bitmask + plane for W3) + the measured JS heap delta of their wrapper objects",
+        "layout_checks": {
+          "record_bytes": 128,
+          "is_128b_record": true,
+          "record_matches_engine_record_bytes": true,
+          "record_stride_multiple_of_alignment": true,
+          "alignment_bytes": 64,
+          "records_buffer_type": "SharedArrayBuffer",
+          "records_buffer_type_matches_declared": true,
+          "records_bytelength": 12800000,
+          "records_bytelength_equals_n_x_record": true,
+          "record_view_type": "Float64Array",
+          "field_map": {
+            "field_count": 14,
+            "payload_bytes_per_record": 112,
+            "span_bytes": 120,
+            "padding_bytes_per_record": 16,
+            "packing_efficiency": 0.875,
+            "overlapping_fields": 0,
+            "misaligned_fields": 0,
+            "fields_fit_in_record": true,
+            "consistent": true,
+            "definition": "computed from the declared field map: payload = sum of field widths, span = max(offset + width); natural alignment = offset % width == 0 for numeric fields; consistent = no overlap, no misalignment, span <= record_bytes",
+            "epistemic": "derivation"
+          },
+          "record_round_trip_failures": 0,
+          "record_round_trip_method": "every record read back through an independent DataView at i x record_bytes + declared offset and compared with the values the builder wrote (ordinal, constants, rest == pos, unused slots zero)",
+          "edge_layout": {
+            "type": "Float64Array",
+            "buffer": "SharedArrayBuffer",
+            "bytes_per_edge": 32,
+            "fields": [
+              "a",
+              "b",
+              "L0",
+              "alpha"
+            ],
+            "source": "engines/physics/runtime-fracture.mjs edgeParams: Float64Array(SharedArrayBuffer(E x 4 x 8)) holding endpoint ordinals, rest length and compliance"
+          },
+          "edge_buffer_type": "Float64Array",
+          "edge_buffer_type_matches_declared": true,
+          "edge_backing_buffer_type": "SharedArrayBuffer",
+          "edge_bytelength": 6400000,
+          "edge_bytelength_equals_E_x_bytes_per_edge": true,
+          "edge_faults": 0,
+          "status_bitmask_type": "Uint32Array",
+          "status_backing_buffer_type": "SharedArrayBuffer",
+          "status_words": 6250,
+          "status_words_equal_ceil_E_over_32": true,
+          "base_address_alignment": "not observable from JavaScript; only record offsets within the buffer are checked",
+          "direct_mode_128b_packing": true,
+          "direct_mode_128b_packing_definition": "record_bytes of this case is 128 AND stride % 64 == 0 AND the field map is consistent (no overlap, natural alignment, fits) AND every record reads back correctly AND buffer types match the declared layout AND no edge fault AND the status bitmask is Uint32; a 4 B record (adversarial A1) or a bad field map fails it"
+        }
+      },
+      "ratio": {
+        "n": 7,
+        "finite_samples": 7,
+        "median": 3.079205757876739,
+        "q1": 3.078348861469385,
+        "q3": 3.0792292289793126,
+        "iqr": 0.0008803675099278152,
+        "min": 3.0780353564953136,
+        "max": 3.0792483700925932,
+        "iqr_pct_of_median": 0.0286,
+        "samples": [
+          3.0785678336570736,
+          3.079205757876739,
+          3.0780353564953136,
+          3.079228812868154,
+          3.079229645090471,
+          3.078129889281696,
+          3.0792483700925932
+        ],
+        "ratio_of_medians": 3.07922,
+        "definition": "object_graph total bytes (measured) / slab total bytes (buffer byteLength + measured wrapper heap) per repetition; median, q1, q3, iqr over repetitions",
+        "epistemic": "measured"
+      },
+      "ratio_memory_usage_basis": {
+        "median": 3.079205757876739,
+        "iqr_pct_of_median": 0.0286,
+        "finite_samples": 7,
+        "definition": "object bytes / (measured arrayBuffers delta + measured wrapper heap delta): the same ratio with the slab side read from process.memoryUsage only; reported for comparison, not the primary",
+        "epistemic": "measured"
+      },
+      "model_applied": {
+        "ratio_with_gc_headroom": 4.1056,
+        "definition": "measured median ratio / (1 - alpha_gc); this is the model applied to the measurement, not a measurement",
+        "epistemic": "model"
+      },
+      "measured_parameters": {
+        "payload_S_bytes": {
+          "value": 11200000,
+          "definition": "S = n x payload_bytes_per_record (sum of the declared field widths, computed from the field map) + plane byteLength; the common denominator of beta, gamma and f; no instrument reading enters S",
+          "epistemic": "derivation"
+        },
+        "beta": {
+          "value": 5.2857,
+          "definition": "measured object-graph bytes (heapUsed + arrayBuffers delta, edge objects included) / S",
+          "epistemic": "derivation",
+          "numerator_epistemic": "measured"
+        },
+        "gamma_layout": {
+          "value": 1.1429,
+          "definition": "(record buffer + plane byteLength) / S = record_bytes / payload_bytes_per_record for a planeless workload; fixed by the declared field map and the 128 B stride, not by any instrument",
+          "epistemic": "derivation"
+        },
+        "f_edges_and_bitmask": {
+          "value": 0.5737,
+          "definition": "(edge buffer + status bitmask byteLength) / S; depends on the harness-chosen edges per entity (edge_strides) and the edge layout, so it is a choice, not a measurement of the engine",
+          "epistemic": "derivation"
+        },
+        "f_wrapper": {
+          "value": 0.000065,
+          "definition": "measured JS heap delta of the buffer wrapper objects / S",
+          "epistemic": "derivation",
+          "numerator_epistemic": "measured"
+        },
+        "f_total": {
+          "value": 0.5737,
+          "definition": "(slab total bytes - record and plane byteLength) / S = f_edges_and_bitmask + f_wrapper",
+          "epistemic": "derivation"
+        },
+        "alpha_gc": {
+          "value": 0.25,
+          "definition": "GC headroom reserve; a model parameter, not measured by this harness",
+          "epistemic": "declared"
+        },
+        "identity_beta_over_gamma_plus_f": {
+          "value": 3.07922,
+          "definition": "beta / (gamma + f) with the values above; equals object bytes / slab bytes by construction because all three share the denominator S; an algebraic identity, not a test, and no verdict depends on it",
+          "epistemic": "derivation"
+        },
+        "model_declared": {
+          "beta": 3.5,
+          "gamma": 1,
+          "f": 0.126,
+          "epistemic": "declared"
+        },
+        "gap_declared_vs_measured": {
+          "beta_pct": 51.021,
+          "gamma_pct": 14.2857,
+          "f_pct": 355.3379,
+          "band_pct": 10,
+          "definition": "|derived value - declared model value| / declared x 100 per parameter",
+          "epistemic": "derivation"
+        },
+        "declared_parameters_within_band": false
+      },
+      "edge_decomposition": {
+        "edges_per_entity": {
+          "value": 2,
+          "definition": "E / n set by edge_strides; a harness parameter",
+          "epistemic": "declared"
+        },
+        "object_bytes_per_edge": {
+          "value": 104,
+          "definition": "(measured object bytes with edges - measured object bytes without edges) / E",
+          "epistemic": "derivation"
+        },
+        "slab_bytes_per_edge": {
+          "value": 32.13,
+          "definition": "(slab bytes with edges - slab bytes without edges) / E",
+          "epistemic": "derivation"
+        },
+        "edge_share_of_object_bytes_pct": {
+          "value": 35.14,
+          "epistemic": "derivation"
+        },
+        "edge_share_of_slab_bytes_pct": {
+          "value": 33.42,
+          "epistemic": "derivation"
+        },
+        "no_edges": {
+          "object_bytes_median": 38400120,
+          "slab_bytes_median": 12800632,
+          "ratio": {
+            "n": 7,
+            "finite_samples": 7,
+            "median": 2.999861256850443,
+            "q1": 2.9998500080105073,
+            "q3": 2.999863757562856,
+            "iqr": 0.000013749552348674143,
+            "min": 2.9998256336093405,
+            "max": 3.000209359821413,
+            "iqr_pct_of_median": 0.0005,
+            "samples": [
+              2.999866258275269,
+              3.000209359821413,
+              2.999861256850443,
+              2.999838759170572,
+              2.999861256850443,
+              2.999861256850443,
+              2.9998256336093405
+            ],
+            "ratio_of_medians": 2.999861,
+            "epistemic": "measured"
+          },
+          "method": "same builders with edge_strides = [] (E = 0): the entity records alone on both sides; the floor of the ratio for this workload"
+        },
+        "definition": "per-edge cost on each side = (bytes with edges - bytes without edges) / E; the headline ratio is a property of records + E/n edges, the no_edges ratio of the records alone"
+      },
+      "gc": {
+        "passes": 3,
+        "extended_passes": 12,
+        "warmup_passes": 2,
+        "warmup_rule": "max(2, ceil(50000 / n)) capped at 256, so short loops (small n) reach the optimizing tier before the window",
+        "pre_window": "warm-up passes, then forced full GC twice, a 5 ms wait, and one re-warm pass; the window itself contains no GC call",
+        "entities_touched_per_pass": 100000,
+        "object_graph_alloc_style": {
+          "gc_count": 0,
+          "gc_kinds": {},
+          "gc_total_ms": 0,
+          "wall_ms": 17.857,
+          "heap_used_delta_bytes": 21607896,
+          "array_buffers_delta_bytes": 0
+        },
+        "object_graph_alloc_style_extended": {
+          "gc_count": 0,
+          "gc_kinds": {},
+          "gc_total_ms": 0,
+          "wall_ms": 25.153,
+          "heap_used_delta_bytes": 86400488,
+          "array_buffers_delta_bytes": 0
+        },
+        "object_graph_inplace_style": {
+          "gc_count": 0,
+          "gc_kinds": {},
+          "gc_total_ms": 0,
+          "wall_ms": 2.745,
+          "heap_used_delta_bytes": 8152,
+          "array_buffers_delta_bytes": 0
+        },
+        "object_graph_inplace_style_extended": {
+          "gc_count": 0,
+          "gc_kinds": {},
+          "gc_total_ms": 0,
+          "wall_ms": 10.404,
+          "heap_used_delta_bytes": 488,
+          "array_buffers_delta_bytes": 0
+        },
+        "slab": {
+          "gc_count": 0,
+          "gc_kinds": {},
+          "gc_total_ms": 0,
+          "wall_ms": 0.871,
+          "heap_used_delta_bytes": 1544,
+          "array_buffers_delta_bytes": 0
+        },
+        "slab_extended": {
+          "gc_count": 0,
+          "gc_kinds": {},
+          "gc_total_ms": 0,
+          "wall_ms": 3.114,
+          "heap_used_delta_bytes": 488,
+          "array_buffers_delta_bytes": 0
+        },
+        "slab_zero_gc": true,
+        "growth_bytes_per_entity_pass": {
+          "object_graph_alloc_style": 72.026,
+          "object_graph_inplace_style": 0.027,
+          "object_graph_inplace_style_extended": 0,
+          "slab_window": 0.005,
+          "slab_extended_window": 0,
+          "definition": "(heapUsed + arrayBuffers delta across the window) / (entities x passes); negative deltas clamp to 0 for the in-place and slab loops"
+        },
+        "slab_growth_max_fraction_of_managed": 0.01,
+        "slab_growth_max_bytes_per_entity_pass": 1,
+        "slab_heap_growth_within_threshold": true,
+        "slab_heap_growth_threshold_definition": "slab window and extended window growth <= 1 % of the managed alloc-style growth, and extended-window growth <= 1 B per entity-pass in absolute terms",
+        "probe_empty_window_first": {
+          "gc_count": 0,
+          "gc_kinds": {},
+          "gc_total_ms": 0,
+          "wall_ms": 0.029,
+          "heap_used_delta_bytes": 688,
+          "array_buffers_delta_bytes": 0,
+          "epistemic": "measured",
+          "definition": "the same gcProbe wrapper around a function that does nothing, first call after settle"
+        },
+        "probe_empty_window": {
+          "gc_count": 0,
+          "gc_kinds": {},
+          "gc_total_ms": 0,
+          "wall_ms": 0.011,
+          "heap_used_delta_bytes": 688,
+          "array_buffers_delta_bytes": 0,
+          "epistemic": "measured",
+          "definition": "the same gcProbe wrapper around a function that does nothing, second call; its heap delta is the cost of the probe itself (observer, closures, memoryUsage readings)"
+        },
+        "slab_window_growth_minus_probe_bytes": {
+          "window": 856,
+          "extended_window": -200,
+          "definition": "(slab window heapUsed + arrayBuffers delta) - probe_empty_window delta; reported beside the raw growth, not substituted for it; no verdict uses it",
+          "epistemic": "derivation"
+        },
+        "slab_growth_note": "residual slab-window growth is reported as measured; this harness does not identify its source (no allocation profile is taken); the probe cost measured with an empty window is reported beside it; the slab loop is DataView or Float64Array JavaScript and its allocation behaviour is established by these readings, not by construction",
+        "object_alloc_style_growth_bytes": 21607896,
+        "object_alloc_style_allocates_beyond_threshold": true,
+        "object_alloc_style_gc_observed": false,
+        "object_alloc_style_gc_observed_extended": false,
+        "object_inplace_style_gc_observed": false,
+        "gc_deferral_note": "V8 pretenures allocation sites whose objects survive, so a managed loop can grow the old generation for several passes before any GC entry appears; the extended window shows when it does",
+        "mutation_source": {
+          "object_graph_alloc_style": "mutateObjectsAlloc(s, pass) {\n    const nodes = s.nodes, dt = 1 / 120;\n    for (let i = 0; i < nodes.length; i++) {\n      const p = nodes[i];\n      const np = [p.pos[0] + p.vel[0] * dt, p.pos[1] + p.vel[1] * dt, p.pos[2] + p.vel[2] * dt];\n      p.prevPos = p.pos;\n      p.pos = np;\n    }\n    flipObjectEdges(s.edges, pass);\n  }",
+          "object_graph_inplace_style": "mutateObjectsInplace(s, pass) {\n    const nodes = s.nodes, dt = 1 / 120;\n    for (let i = 0; i < nodes.length; i++) {\n      const p = nodes[i], pos = p.pos, prev = p.prevPos, vel = p.vel;\n      prev[0] = pos[0]; prev[1] = pos[1]; prev[2] = pos[2];\n      pos[0] += vel[0] * dt; pos[1] += vel[1] * dt; pos[2] += vel[2] * dt;\n    }\n    flipObjectEdges(s.edges, pass);\n  }",
+          "slab": "mutateSlab(s, pass) {\n    const P = s.view, dt = 1 / 120;\n    for (let i = 0; i < s.n; i++) {\n      const o = i * STRIDE;\n      P[o + 4] = P[o]; P[o + 5] = P[o + 1]; P[o + 6] = P[o + 2];\n      P[o] += P[o + 8] * dt; P[o + 1] += P[o + 9] * dt; P[o + 2] += P[o + 10] * dt;\n    }\n    flipSlabEdges(s, pass);\n  }"
+        }
+      },
+      "timing": {
+        "wall_ms": 2288,
+        "peak_rss_bytes": 578699264,
+        "settle_rounds_total": 112
+      }
+    }
+  ],
+  "summary": {
+    "ratio_mean_of_medians": {
+      "value": 2.2967,
+      "definition": "unweighted mean of the four per-workload median ratios",
+      "epistemic": "derivation"
+    },
+    "ratio_byte_weighted": {
+      "value": 2.1196,
+      "definition": "sum of object bytes / sum of slab bytes across the workloads",
+      "epistemic": "derivation",
+      "total_object_bytes": 165927688,
+      "total_slab_bytes": 78283108
+    },
+    "ratio_min_median": {
+      "value": 1.0062,
+      "epistemic": "measured"
+    },
+    "ratio_max_median": {
+      "value": 3.0792,
+      "epistemic": "measured"
+    },
+    "net_reduction_pct": {
+      "from_mean_ratio": 56.46,
+      "mean_of_per_workload": 46.96,
+      "byte_weighted": 52.82,
+      "per_workload": [
+        {
+          "key": "w1_v8_mixed_object_graphs",
+          "ratio": 2.1624,
+          "reduction_pct": 53.75
+        },
+        {
+          "key": "w2_multi_agent_state",
+          "ratio": 2.939,
+          "reduction_pct": 65.97
+        },
+        {
+          "key": "w3_video_pipeline",
+          "ratio": 1.0062,
+          "reduction_pct": 0.61
+        },
+        {
+          "key": "w4_physics_xpbd_particles",
+          "ratio": 3.0792,
+          "reduction_pct": 67.52
+        }
+      ],
+      "largest_aggregation": "from_mean_ratio",
+      "smallest_aggregation": "mean_of_per_workload",
+      "definition": "three aggregations of the same medians: from_mean_ratio = (1 - 1 / mean ratio) x 100 (the least conservative when the ratios spread), mean_of_per_workload = mean of (1 - 1 / r_i) x 100, byte_weighted = (1 - sum slab bytes / sum object bytes) x 100; none of them is the reduction of any single workload",
+      "epistemic": "derivation"
+    },
+    "ratio_iqr_pct_max": {
+      "value": 0.0286,
+      "epistemic": "measured"
+    },
+    "edges_per_entity": {
+      "value": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "definition": "E / n per workload, set by edge_strides",
+      "epistemic": "declared"
+    },
+    "no_edges": {
+      "ratio_mean_of_medians": {
+        "value": 2.001,
+        "definition": "unweighted mean of the four per-workload median ratios",
+        "epistemic": "derivation"
+      },
+      "ratio_byte_weighted": {
+        "value": 1.7274,
+        "definition": "sum of object bytes / sum of slab bytes across the workloads",
+        "epistemic": "derivation",
+        "total_object_bytes": 117091280,
+        "total_slab_bytes": 67785072
+      },
+      "ratio_min_median": {
+        "value": 1.0047,
+        "epistemic": "measured"
+      },
+      "ratio_max_median": {
+        "value": 2.9999,
+        "epistemic": "measured"
+      },
+      "net_reduction_pct": {
+        "from_mean_ratio": 50.03,
+        "mean_of_per_workload": 40.53,
+        "byte_weighted": 42.11,
+        "per_workload": [
+          {
+            "key": "w1_v8_mixed_object_graphs",
+            "ratio": 1.5624,
+            "reduction_pct": 36
+          },
+          {
+            "key": "w2_multi_agent_state",
+            "ratio": 2.4372,
+            "reduction_pct": 58.97
+          },
+          {
+            "key": "w3_video_pipeline",
+            "ratio": 1.0047,
+            "reduction_pct": 0.47
+          },
+          {
+            "key": "w4_physics_xpbd_particles",
+            "ratio": 2.9999,
+            "reduction_pct": 66.67
+          }
+        ],
+        "largest_aggregation": "from_mean_ratio",
+        "smallest_aggregation": "mean_of_per_workload",
+        "definition": "three aggregations of the same medians: from_mean_ratio = (1 - 1 / mean ratio) x 100 (the least conservative when the ratios spread), mean_of_per_workload = mean of (1 - 1 / r_i) x 100, byte_weighted = (1 - sum slab bytes / sum object bytes) x 100; none of them is the reduction of any single workload",
+        "epistemic": "derivation"
+      },
+      "definition": "the same aggregations with edge_strides = []: the floor of the ratio, records alone"
+    },
+    "w_model": {
+      "value": 4.1445,
+      "expression": "W = (beta / (1 - alpha_gc)) / (gamma + f)",
+      "parameters": {
+        "beta": 3.5,
+        "alpha_gc": 0.25,
+        "gamma": 1,
+        "f": 0.126
+      },
+      "epistemic": "model"
+    },
+    "reconciles_within_pct": {
+      "value": 44.58,
+      "definition": "|mean of medians - W_model| / W_model x 100",
+      "epistemic": "derivation"
+    },
+    "model_applied_mean_with_gc_headroom": {
+      "value": 3.0623,
+      "reconciles_within_pct": 26.11,
+      "epistemic": "model"
+    },
+    "declared_parameters_within_band_workloads": {
+      "value": [],
+      "band_pct": 10,
+      "epistemic": "derivation"
+    },
+    "which_is_which": "ratio_* medians come from process.memoryUsage() deltas and buffer byteLengths on this machine; the aggregations are arithmetic over those medians; w_model comes from four declared parameters and no measurement; reconciles_within_pct is the gap between them; gap_declared_vs_measured per workload says which parameter the model gets wrong"
+  },
+  "verdicts": {
+    "slab_mutation_zero_gc": true,
+    "slab_mutation_heap_growth_within_threshold": true,
+    "object_alloc_style_allocates_beyond_threshold_every_workload": true,
+    "object_alloc_style_gc_observed_extended_every_workload": false,
+    "object_inplace_style_gc_observed_any_workload": false,
+    "direct_mode_128b_packing": true,
+    "field_maps_consistent_every_workload": true,
+    "record_round_trip_ok_every_workload": true,
+    "slab_array_buffers_match_bytelength_1pct": true,
+    "declared_model_parameters_within_band_every_workload": false,
+    "ratio_iqr_within_repro_band": true,
+    "all_ratios_finite_positive": true,
+    "previous_run_present": true,
+    "previous_run_same_settings": true,
+    "bit_identical_to_previous_run": true,
+    "raw_output_hash_equal_to_previous_run": false,
+    "reproduces_previous_run_within_band": true
+  },
+  "verdict_definitions": {
+    "previous_run_present": "an earlier receipt from this script with settings_hash, deterministic_output_hash and raw_output_hash exists in the receipts folder",
+    "previous_run_same_settings": "settings_hash equal to the previous receipt (same script bytes, constants, config, runtime); a settings identity, not an output check",
+    "bit_identical_to_previous_run": "deterministic_output_hash equal to the previous receipt: SIM-STANDARD Rule 1 as computed on this harness's published output (see deterministic_output_definition); false when any published median, aggregation, byteLength, layout check or verdict differs, including a rounding-boundary flip",
+    "raw_output_hash_equal_to_previous_run": "raw_output_hash equal to the previous receipt; the raw heap readings are disclosed as non-deterministic (see honesty) and this verdict feeds nothing",
+    "reproduces_previous_run_within_band": "every workload median within max(previous IQR, this IQR, 1 % of the previous median) of the previous receipt; reported beside bit_identical_to_previous_run, it does not satisfy Rule 1",
+    "declared_model_parameters_within_band_every_workload": "every declared parameter within 10 % of the value derived from the measured workload, on every workload"
+  },
+  "previous_run": {
+    "run_id": "dram-sim-20260929T114134Z",
+    "file": "dram-sim-20260929T114134Z.json",
+    "previous_receipt_hash_verified": true,
+    "settings_hash_equal": true,
+    "deterministic_output_hash_equal": true,
+    "previous_deterministic_output_hash": "c63b9e6d73bbcea18c67ee8941985ac3e96956908cb386b872b2cdfb782e7dc9",
+    "raw_output_hash_equal": false,
+    "previous_raw_output_hash": "c99bac4285567dd39c0e4f9f7f5b9bc34015aff2f20cc2f169e5b0eef83b8163",
+    "per_workload": [
+      {
+        "key": "w1_v8_mixed_object_graphs",
+        "previous_median": 2.162383,
+        "this_median": 2.162383,
+        "delta": 0,
+        "band": 0.021624,
+        "within_band": true
+      },
+      {
+        "key": "w2_multi_agent_state",
+        "previous_median": 2.938998,
+        "this_median": 2.938998,
+        "delta": 0,
+        "band": 0.02939,
+        "within_band": true
+      },
+      {
+        "key": "w3_video_pipeline",
+        "previous_median": 1.006179,
+        "this_median": 1.006179,
+        "delta": 0,
+        "band": 0.010062,
+        "within_band": true
+      },
+      {
+        "key": "w4_physics_xpbd_particles",
+        "previous_median": 3.078008,
+        "this_median": 3.079206,
+        "delta": 0.001198,
+        "band": 0.03078,
+        "within_band": true
+      }
+    ],
+    "within_band": true,
+    "band_definition": "max(previous IQR, this IQR, 1 % of the previous median) per workload",
+    "settings_hash_equal_definition": "same settings (script bytes, constants, config, runtime); not an output check and cannot differ between two runs of the same script with the same flags on the same runtime",
+    "deterministic_output_hash_equal_definition": "the previous receipt's deterministic_output_hash equals this run's: SIM-STANDARD Rule 1 bit-identical output on the published output (medians and aggregations at the published precision, byteLengths, field maps, layout checks, constants, verdicts)",
+    "raw_output_hash_equal_definition": "the previous receipt's raw_output_hash equals this run's; the raw heap readings are disclosed as non-deterministic and this equality feeds no verdict",
+    "within_band_definition": "every workload median within the band above; reported beside the deterministic check and not a substitute for it"
+  },
+  "honesty": "Object-graph side: V8 heap objects built per the disclosed shape, measured as the process.memoryUsage() heapUsed + arrayBuffers delta between two settled readings (each reading = forced full GC twice + 5 ms wait, repeated until heapUsed and arrayBuffers stop moving) with the graph live (node --expose-gc), median and IQR over the stated repetitions; no GC headroom is folded in. Slab side: one buffer of 128-byte records (RECORD_BYTES and STRIDE imported from engines/physics/runtime-fracture.mjs) at 64-byte multiples, plus an edge buffer and a Uint32Array status bitmask; slab bytes = byteLength of those buffers (exact by allocation, cross-checked against the measured arrayBuffers delta) + the measured heap delta of their JS wrappers. W4 uses the engine layout: the 14 slots the engine reads and writes (pos, invMass, prev, vel, nodalVol, rest; slots 7 and 15 unused) on a SharedArrayBuffer, edges as the engine edgeParams Float64Array of [a, b, L0, alpha] (32 B per edge) on a SharedArrayBuffer, bitmask on a SharedArrayBuffer; W1-W3 use DataView field maps and Int32Array ordinal pairs (8 B per edge) that are the harness layout, not taken from the engine. Edges per entity (2) is a harness choice; every workload is also measured with no edges and the per-edge cost of each side is reported, so the edge share of the headline is visible. S, beta, gamma and f are derivations from the declared field map and buffer byteLengths (only their object-byte and wrapper-heap terms are instrument readings); the identity beta / (gamma + f) = ratio holds by construction and no verdict depends on it; the receipt reports the gap between each declared model parameter and the derived value instead. Zero-GC is measured by counting perf_hooks gc entries during the disclosed mutation loops after a count-scaled warm-up; the probe cost is measured with an empty window and reported beside the slab growth, and the source of any residual slab growth is not identified. Packing is checked by reading every record back through an independent DataView, by the field-map arithmetic and by the buffer types; a case with a non-128 B record fails the packing verdict. Pointer compression is read from process.config.variables and recorded as an observation. W_model is the four declared parameters and nothing else. This harness is the Node heap-profiler leg of SIM-STANDARD Rule 5 only; the gem5 + DRAMSys leg is not run by it. Non-deterministic fields, disclosed: object_graph.heap_used_bytes and array_buffers_bytes samples and medians, slab.wrapper_heap_bytes and array_buffers_delta_bytes, every ratio sample and the 6-decimal ratio medians, the 4-decimal aggregations (mean of medians, byte-weighted ratio, reductions, gap to model), beta, f_wrapper and f_total, the gc probe byte deltas and gc counts, raw_output_hash, timing and peak rss; they are process.memoryUsage() and perf_hooks readings of V8 heap state, which depends on allocation history, page-level heap growth and GC scheduling that the seeds do not fix, so they differ by a few bytes to a few KB between processes (about 0.04 % of a ratio). Deterministic fields, the Rule 1 object: entity and edge counts, buffer byteLengths, field maps, layout checks, S, gamma_layout, the ratio medians with and without edges at the published precision (2 decimals, derived from the 1 % band), the aggregations of those published medians, the constants and the verdict set; deterministic_output_hash covers exactly those and its equality between runs is the bit-identity check; the verdicts that count gc entries are in that set because the standard asks for the verdicts to reproduce, and a gc-scheduling flip fails the check as written. Not modeled: V8 old-space fragmentation beyond what heapUsed counts, OS page granularity, DRAM row/bank effects, GC pause latency, buffer base-address alignment (not observable from JS), the engine tet constraints and colour lists (only particles, edges and the edge bitmask are laid out), and any second platform.",
+  "receipt_hash_scheme": "sha256 over JSON.stringify of the receipt with keys sorted recursively at every level, receipt_hash excluded; the earlier scheme JSON.stringify(doc, Object.keys(doc).sort(), 2) dropped every nested key and covered only top-level scalars",
+  "settings_hash": "8f0d360a5a91b04f7ec40cc743fda02bda3a46509cb84da9cfbf8069c1e87b64",
+  "settings_hash_definition": "sha256 over the settings only: docket, constants, workload layouts, model parameters, runtime facts, config and the author sha256; no measured value enters it, so two runs of the same script with the same settings on the same runtime always share it; equality means same settings, never same result",
+  "published_precision": {
+    "ratio_decimals": 2,
+    "ratio_quantum": 0.01,
+    "definition": "ratio_decimals = ceil(-log10(REPRO_BAND_PCT / 100)) with REPRO_BAND_PCT 1: the largest number of decimals whose quantum is still at or under the declared reproducibility band at ratio parity (1.0); derived from the declared band, never from an observed run; the 6-decimal medians stay in the receipt as raw readings",
+    "epistemic": "derivation"
+  },
+  "deterministic_output": {
+    "published_precision": {
+      "ratio_decimals": 2
+    },
+    "constants": {
+      "record_bytes": 128,
+      "stride_doubles": 16,
+      "alignment_bytes": 64,
+      "chunk_bytes": 65536,
+      "edge_strides": [
+        1,
+        7
+      ],
+      "model_parameters": {
+        "beta": 3.5,
+        "alpha_gc": 0.25,
+        "gamma": 1,
+        "f": 0.126
+      },
+      "w_model": 4.1445
+    },
+    "workloads": [
+      {
+        "key": "w1_v8_mixed_object_graphs",
+        "entities": 200000,
+        "edges": 400000,
+        "edge_strides": [
+          1,
+          7
+        ],
+        "slab_bytelength": {
+          "records": 25600000,
+          "edges": 3200000,
+          "status": 50000,
+          "plane": 0,
+          "total": 28850000
+        },
+        "field_map": {
+          "field_count": 9,
+          "payload_bytes_per_record": 42,
+          "span_bytes": 46,
+          "padding_bytes_per_record": 86,
+          "packing_efficiency": 0.3281,
+          "consistent": true
+        },
+        "layout_checks": {
+          "record_bytes": 128,
+          "is_128b_record": true,
+          "direct_mode_128b_packing": true,
+          "record_round_trip_failures": 0,
+          "edge_faults": 0,
+          "status_words": 12500,
+          "records_buffer_type": "ArrayBuffer",
+          "edge_buffer_type": "Int32Array",
+          "status_bitmask_type": "Uint32Array"
+        },
+        "payload_S_bytes": 8400000,
+        "gamma_layout": 3.0476,
+        "ratio_median": 2.16,
+        "ratio_no_edges_median": 1.56
+      },
+      {
+        "key": "w2_multi_agent_state",
+        "entities": 50000,
+        "edges": 100000,
+        "edge_strides": [
+          1,
+          7
+        ],
+        "slab_bytelength": {
+          "records": 6400000,
+          "edges": 800000,
+          "status": 12500,
+          "plane": 0,
+          "total": 7212500
+        },
+        "field_map": {
+          "field_count": 11,
+          "payload_bytes_per_record": 50,
+          "span_bytes": 68,
+          "padding_bytes_per_record": 78,
+          "packing_efficiency": 0.3906,
+          "consistent": true
+        },
+        "layout_checks": {
+          "record_bytes": 128,
+          "is_128b_record": true,
+          "direct_mode_128b_packing": true,
+          "record_round_trip_failures": 0,
+          "edge_faults": 0,
+          "status_words": 3125,
+          "records_buffer_type": "ArrayBuffer",
+          "edge_buffer_type": "Int32Array",
+          "status_bitmask_type": "Uint32Array"
+        },
+        "payload_S_bytes": 2500000,
+        "gamma_layout": 2.56,
+        "ratio_median": 2.94,
+        "ratio_no_edges_median": 2.44
+      },
+      {
+        "key": "w3_video_pipeline",
+        "entities": 350,
+        "edges": 700,
+        "edge_strides": [
+          1,
+          7
+        ],
+        "slab_bytelength": {
+          "records": 44800,
+          "edges": 5600,
+          "status": 88,
+          "plane": 22937600,
+          "total": 22988088
+        },
+        "field_map": {
+          "field_count": 9,
+          "payload_bytes_per_record": 27,
+          "span_bytes": 32,
+          "padding_bytes_per_record": 101,
+          "packing_efficiency": 0.2109,
+          "consistent": true
+        },
+        "layout_checks": {
+          "record_bytes": 128,
+          "is_128b_record": true,
+          "direct_mode_128b_packing": true,
+          "record_round_trip_failures": 0,
+          "edge_faults": 0,
+          "status_words": 22,
+          "records_buffer_type": "ArrayBuffer",
+          "edge_buffer_type": "Int32Array",
+          "status_bitmask_type": "Uint32Array"
+        },
+        "payload_S_bytes": 22947050,
+        "gamma_layout": 1.0015,
+        "ratio_median": 1.01,
+        "ratio_no_edges_median": 1
+      },
+      {
+        "key": "w4_physics_xpbd_particles",
+        "entities": 100000,
+        "edges": 200000,
+        "edge_strides": [
+          1,
+          7
+        ],
+        "slab_bytelength": {
+          "records": 12800000,
+          "edges": 6400000,
+          "status": 25000,
+          "plane": 0,
+          "total": 19225000
+        },
+        "field_map": {
+          "field_count": 14,
+          "payload_bytes_per_record": 112,
+          "span_bytes": 120,
+          "padding_bytes_per_record": 16,
+          "packing_efficiency": 0.875,
+          "consistent": true
+        },
+        "layout_checks": {
+          "record_bytes": 128,
+          "is_128b_record": true,
+          "direct_mode_128b_packing": true,
+          "record_round_trip_failures": 0,
+          "edge_faults": 0,
+          "status_words": 6250,
+          "records_buffer_type": "SharedArrayBuffer",
+          "edge_buffer_type": "Float64Array",
+          "status_bitmask_type": "Uint32Array"
+        },
+        "payload_S_bytes": 11200000,
+        "gamma_layout": 1.1429,
+        "ratio_median": 3.08,
+        "ratio_no_edges_median": 3
+      }
+    ],
+    "summary": {
+      "with_edges": {
+        "ratio_mean_of_published_medians": 2.2975,
+        "ratio_min_published_median": 1.01,
+        "ratio_max_published_median": 3.08,
+        "net_reduction_pct_from_mean": 56.47,
+        "net_reduction_pct_mean_of_per_workload": 47.05,
+        "reconciles_within_pct": 44.57
+      },
+      "no_edges": {
+        "ratio_mean_of_published_medians": 2,
+        "ratio_min_published_median": 1,
+        "ratio_max_published_median": 3,
+        "net_reduction_pct_from_mean": 50,
+        "net_reduction_pct_mean_of_per_workload": 40.4,
+        "reconciles_within_pct": 51.74
+      }
+    },
+    "verdicts": {
+      "slab_mutation_zero_gc": true,
+      "slab_mutation_heap_growth_within_threshold": true,
+      "object_alloc_style_allocates_beyond_threshold_every_workload": true,
+      "object_alloc_style_gc_observed_extended_every_workload": false,
+      "object_inplace_style_gc_observed_any_workload": false,
+      "direct_mode_128b_packing": true,
+      "field_maps_consistent_every_workload": true,
+      "record_round_trip_ok_every_workload": true,
+      "slab_array_buffers_match_bytelength_1pct": true,
+      "declared_model_parameters_within_band_every_workload": false,
+      "ratio_iqr_within_repro_band": true,
+      "all_ratios_finite_positive": true
+    }
+  },
+  "deterministic_output_hash": "c63b9e6d73bbcea18c67ee8941985ac3e96956908cb386b872b2cdfb782e7dc9",
+  "deterministic_output_definition": "sha256 over the deterministic output: per workload the key, entity and edge counts, edge strides, the slab byteLengths (records, edges, status, plane; exact by allocation), the field-map arithmetic (payload, span, padding, packing efficiency), the layout checks (128 B packing, record round-trip failures, edge faults, status words, buffer types), S and gamma_layout (fixed by the field map and the counts), and the published medians: the ratio median and the no-edge ratio median rounded to 2 decimals; the summary is arithmetic over those published medians (mean, min, max, the two reductions and the gap to W_model), so it adds no rounding of its own; the layout constants (record bytes, stride, alignment, chunk bytes, edge strides, model parameters, W_model); and the verdict set from verdictsFor; excluded and disclosed as non-deterministic: raw byte medians, ratio samples, the 6-decimal medians, beta and f_total (ratios of raw heap bytes to S whose jitter at 2 decimals is not below the quantum), the byte-weighted ratio (weighted by raw heap byte totals), gc counts and growth; equality between two runs is SIM-STANDARD Rule 1 bit-identical output as this harness defines its published output; a median whose run-to-run jitter straddles a rounding boundary makes the hashes differ and the check fails as written (deterministic_rounding_margins reports the distance to the nearest boundary), the band comparison is reported beside it and does not substitute",
+  "deterministic_rounding_margins": {
+    "rows": [
+      {
+        "field": "w1_v8_mixed_object_graphs.ratio_median",
+        "value": 2.162383,
+        "published": 2.16,
+        "margin": 0.00261686,
+        "quantum": 0.01
+      },
+      {
+        "field": "w1_v8_mixed_object_graphs.ratio_no_edges_median",
+        "value": 1.562418,
+        "published": 1.56,
+        "margin": 0.00258166,
+        "quantum": 0.01
+      },
+      {
+        "field": "w2_multi_agent_state.ratio_median",
+        "value": 2.938998,
+        "published": 2.94,
+        "margin": 0.00399835,
+        "quantum": 0.01
+      },
+      {
+        "field": "w2_multi_agent_state.ratio_no_edges_median",
+        "value": 2.437159,
+        "published": 2.44,
+        "margin": 0.00215917,
+        "quantum": 0.01
+      },
+      {
+        "field": "w3_video_pipeline.ratio_median",
+        "value": 1.006179,
+        "published": 1.01,
+        "margin": 0.00117864,
+        "quantum": 0.01
+      },
+      {
+        "field": "w3_video_pipeline.ratio_no_edges_median",
+        "value": 1.004721,
+        "published": 1,
+        "margin": 0.00027864,
+        "quantum": 0.01
+      },
+      {
+        "field": "w4_physics_xpbd_particles.ratio_median",
+        "value": 3.079206,
+        "published": 3.08,
+        "margin": 0.00420576,
+        "quantum": 0.01
+      },
+      {
+        "field": "w4_physics_xpbd_particles.ratio_no_edges_median",
+        "value": 2.999861,
+        "published": 3,
+        "margin": 0.00486126,
+        "quantum": 0.01
+      }
+    ],
+    "tightest": {
+      "field": "w3_video_pipeline.ratio_no_edges_median",
+      "value": 1.004721,
+      "published": 1,
+      "margin": 0.00027864,
+      "quantum": 0.01
+    },
+    "definition": "margin = distance from the unrounded median to the nearest rounding boundary of the published quantum; a margin smaller than the run-to-run jitter of that median means the deterministic hash can differ between runs on rounding alone; reported, not a verdict",
+    "epistemic": "derivation"
+  },
+  "raw_output_hash": "6b39cefe2fe219b75e497c888218992e79b5afbec52966109c1021cb413e4a54",
+  "raw_output_hash_definition": "sha256 over the raw measured output per workload: entity and edge counts, object-graph and slab byte medians, every ratio sample to 6 decimals, no-edge ratio median and slab gc count; timing excluded; these are process.memoryUsage() readings and gc counts that V8 does not fix from the seeds, so this hash is disclosed as non-deterministic and no verdict is computed from its equality",
+  "timing": {
+    "wall_s": 7.63,
+    "peak_rss_bytes": 578699264
+  },
+  "plot": {
+    "svg": "dram-sim-20260929T114147Z.svg",
+    "svg_sha256": "f8730606d1256d8bd21da287a4135271c300bff41a0941c9e2634c69ed73547b",
+    "png": "dram-sim-20260929T114147Z.png",
+    "png_sha256": "acc803b4662b42dd88537bb29d318ddf7c96e24f96f85a7d25a52ae1c594a6b3",
+    "png_note": null,
+    "rasterizer": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+    "width_px": 1800,
+    "height_px": 700,
+    "source": "SVG rendered by this script from the payload above, PNG by headless Chrome from that SVG; no typed numbers"
+  },
+  "receipt_hash": "d77bf4dd1ef7c226561666a88f1e12b4836cf8381d86e9a21ddc325430cfedfe"
+}

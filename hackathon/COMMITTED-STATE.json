@@ -1,0 +1,30 @@
+{
+  "iteration": 14,
+  "model": "muse-spark",
+  "suite_sha256": "fc526ebf3ae64053ca95e976fcabaf3d59bfcad8f1b8e0e467a4e1b13f139bbf",
+  "accepted_tests_sha256": "ac9504bb5e35ed93f9a244c5693020bac0bc5ea876169b17f9f0449c457499aa",
+  "open_invariants_sha256": "e055fbd23418f8b5a436aa38294f43f650b4e376d3def654a36f4c93c6e4b126",
+  "solver_sha256": "850c338287151e30f5f06c920a5de626d79fbe814c852d10e4c6c80a0137a291",
+  "baseline_pass": 58,
+  "baseline_total": 58,
+  "tokens_used": 20000,
+  "accepted_count": 12,
+  "regressions": 0,
+  "last_receipt_sha256": "383f8b6344a9fb9418a4b3c57c5d363fa11995b4ebf969f6f8cb353e78ef3f31",
+  "completed_proposals": [
+    "inv-01-energy-freefall",
+    "inv-02-accepted-test-edit-attempt",
+    "repair-fault-energy-3",
+    "repair-fault-momentum-4",
+    "repair-fault-instability-5",
+    "repair-fault-nan-6",
+    "inv-03-momentum-conservation",
+    "inv-04-hydrostatic-volume",
+    "inv-05-timestep-stability",
+    "inv-06-nan-freedom",
+    "inv-07-contact-nonpenetration",
+    "inv-08-determinism",
+    "inv-09-coulomb-friction-cone"
+  ],
+  "state_sha256": "1c0ffe1396032085bb3f15aba2e4ce0b3858cc66830fa115f7a998e003938130"
+}

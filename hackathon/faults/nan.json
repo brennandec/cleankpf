@@ -1,0 +1,12 @@
+{
+  "id": "nan",
+  "invariant": "nan: particle positions and velocities remain strictly finite (0 NaN/Inf values) at rest-length constraints (units: count)",
+  "expectedRedTest": "fault invariant [nan]: zero-strain / rest-length constraint projection produces 0 NaN values (units: count)",
+  "units": "count",
+  "threshold": 0,
+  "description": "Divide constraint impulse by (current - rest) length (L - state.edgeL0[e]), producing 0/0 = NaN on unstretched edges.",
+  "patch": {
+    "find": "const f = dl / L;",
+    "replace": "const f = dl / (L - state.edgeL0[e]); /* FAULT:nan */"
+  }
+}
