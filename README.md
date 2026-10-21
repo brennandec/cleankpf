@@ -18,7 +18,7 @@ manymoats is a pre-revenue software and intellectual-property portfolio built ar
 
 Resident State keeps reusable state close to execution, admits changes through explicit rules, and keeps the evidence when work moves between tools. Admission, replay, shared state, accounting, and cache artifacts exist and have scoped tests.
 
-ATESO is the one-shot build, ATESO 4D.
+Iceblock is the current release version of Resident State (Resident State: Iceblock).
 
 The local front doors are ManyMoats (fleet hub), Slash (clip-editing desk), FileFriend (envelope opening and signature flow), grepthat (evidence catalog), gogrepthat (research notebook), YourSyntax (keyboard project), ToggleSnap (reply-rule editor), InputDojo (conversational intake), LoomAllure (design-kit workbench), SCF Passport (provenance), MoatID (identity gate), CohortCollab (scheduling rules), SynergyMade (action-flow builder), Tethered (creator pages), WeShipAds (campaign presentation), YapCircuit (local catalog), Lathe (content-flow ranking), ExLegacy (product tour), TheseRails (receipt verification), Teeming (agent workspace), and Viral (physics diagnostic route). These are registered destinations; this list does not certify completed customer workflows. — R28
 
@@ -26,16 +26,16 @@ Numbers below are dated project records or explicitly external reports. Access l
 
 ## EVIDENCE
 
-- Span: 124 days from 2026-06-18 to 2026-10-20. — R18
-- Git history: 69,628 commits recorded at the cited snapshot; commit metadata does not establish human authorship. — R19
-- Tree: 112,355 tracked files. — R20
+- Span: 125 days from 2026-06-18 to 2026-10-21. — R18
+- Git history: 70,965 commits recorded at the cited snapshot; commit metadata does not establish human authorship. — R19
+- Tree: 113,230 tracked files. — R20
 - Engine shelf: 62 entries counted in `engines/`; directory entries alone do not establish usable capabilities. — R21
 - Filing records: 39 dockets labeled filed-confirmed; 28 dockets carry PDF-extracted evidence. These counts do not establish distinct application count or legal scope. — R22
 - Review inventory: 74 judge-panel session directories and 5 named adversarial-session directories. Directory counts do not prove completed reviews, independent audits, or a passing verdict. — R23
-- Code: 3,800,651 lines across tracked code files (875,081 lines under the legacy single-batch buffer command). — R24
+- Code: 3,810,125 lines across tracked code files (883,699 lines under the legacy single-batch buffer command). — R24
 - First artifact: birth 2026-06-17 23:22:27. — R25
 - External reproduction (project-reported external statement, unverified publicly, 2026-10-09): a reviewer ran supplied sources on their machine and reported admission broker `26/26`, fracture solver `8/8`, soft-body and sand harnesses passed, and GPU parity gap `0.00435 mm` against the `0.01 mm` gate with movement and zero NaNs. Their words, their machine. — R26
-- Portability fix (project-reported external finding, 2026-10-09): GCC `13.3` `-Wpedantic` diagnostic on the `xpbd_soft_init` call site; 3 lines changed; the reporter re-ran and confirmed exit code `0` with zero diagnostics. Source files are tracked and clean in the private tree checked 2026-10-20; external re-run report remains unverified publicly. — R27
+- Portability fix (project-reported external finding, 2026-10-09): GCC `13.3` `-Wpedantic` diagnostic on the `xpbd_soft_init` call site; 3 lines changed; the reporter re-ran and confirmed exit code `0` with zero diagnostics. Source files are tracked and clean in the private tree checked 2026-10-21; external re-run report remains unverified publicly. — R27
 
 ## RECORDED MEASUREMENTS
 
@@ -70,9 +70,9 @@ Numbers below are dated project records or explicitly external reports. Access l
 - 2 development: @playwright/test, parse5.
 
 ### Architecture source inventory (historical project records)
-- Spine bus — `deploy/_shared/spine-bus.mjs` (902 lines on 2026-10-20): in-page publish/subscribe, a 10 MiB memory slab, a 50-entry list mirrored in `localStorage`. — R07
+- Spine bus — `deploy/_shared/spine-bus.mjs` (902 lines on 2026-10-21): in-page publish/subscribe, a 10 MiB memory slab, a 50-entry list mirrored in `localStorage`. — R07
 - Teeming bus/spine events — suite 28/28 pass; p95 3.33 µs over 10,000 events. — R10
-- Property hub — `deploy/index.html` consumes the topology owner with 21 registered destinations, checked 2026-10-20. Registration does not certify a useful workflow. — R28
+- Property hub — `deploy/index.html` consumes the topology owner with 21 registered destinations, checked 2026-10-21. Registration does not certify a useful workflow. — R28
 
 ## RECEIPTS APPENDIX
 
@@ -123,7 +123,7 @@ R12 — Registered-domain availability: 18 of 18 answer `200` (2026-10-03T22:45Z
   raw: `00-FOUNDERS-INBOX/archive/2026-10/2026-10-03-cleankpf-receipts/raw-2026-10-03.txt` (e.g. `manymoats.com 200 0 0.076187s`)
   cmd per domain: `curl -sS -L -I -m 8 -o /dev/null -w "%{http_code} %{num_redirects} %{time_total}s" https://<domain>/`
 
-R13 — Stripe code presence + tracking on 2026-10-20: `checkout-session.mjs` `35` (tracked), `stripe-webhook-handler.mjs` `117` (tracked), `pricing.json` `410` (tracked).
+R13 — Stripe code presence + tracking on 2026-10-21: `checkout-session.mjs` `35` (tracked), `stripe-webhook-handler.mjs` `117` (tracked), `pricing.json` `410` (tracked).
   cmd: `git ls-files deploy/backend/` and `wc -l deploy/backend/checkout-session.mjs deploy/backend/stripe-webhook-handler.mjs deploy/backend/pricing.json`
 
 R14 — Stripe module suite and live $1.00 charge check on 2026-10-14: 96 of 96 backend payment tests pass and 9 of 9 commerce tests pass; live $1.00 card charge (100 cents, 33 cents fee, 67 cents net) recorded in `ops-bridge/receipts/2026-10-14/manymoats-stripe-live-seal.json` (on 2026-10-05 the suite was 93 of 94 tests).
@@ -139,14 +139,14 @@ R16 — Substrate GPU runtime: `deploy/substrate/runtime/xpbd-gpu.mjs` 304 lines
 R17 — Gain-share slider presence: `deploy/enterprise.html`, `deploy/manymoats/enterprise.html` (draft 25% split; multiplier printed on the slider is a draft figure). Terms source: `00-FOUNDERS-INBOX/archive/2026-09/2026-09-22-ateso-launch-battle-plan/ATESO-ENTERPRISE-GAIN-SHARE-MASTER-AGREEMENT.md` (§2.1 twenty-five percent (25.0%); scenario document, not received money).
   cmd: `grep -rin gain deploy/enterprise.html deploy/manymoats/enterprise.html` + `grep -n "Gain-Share Percentage" 00-FOUNDERS-INBOX/archive/2026-09/2026-09-22-ateso-launch-battle-plan/ATESO-ENTERPRISE-GAIN-SHARE-MASTER-AGREEMENT.md`
 
-R18 — Project span: 124 days from 2026-06-18 to 2026-10-20.
-  cmd: `python3 -c "from datetime import date; print((date(2026, 10, 20) - date(2026, 6, 18)).days)"`
+R18 — Project span: 125 days from 2026-06-18 to 2026-10-21.
+  cmd: `python3 -c "from datetime import date; print((date(2026, 10, 21) - date(2026, 6, 18)).days)"`
 
-R19 — Git history: 69,628 commits counted 2026-10-20. Author labels are metadata; they do not prove who wrote the code or whether the work was human or automated.
+R19 — Git history: 70,965 commits counted 2026-10-21. Author labels are metadata; they do not prove who wrote the code or whether the work was human or automated.
   cmd: `git rev-list --count HEAD`
   cmd: `git log --format=%an | sort | uniq -c | sort -rn`
 
-R20 — Tracked files: 112,355 files, counted 2026-10-20; a later tree can produce a different count.
+R20 — Tracked files: 113,230 files, counted 2026-10-21; a later tree can produce a different count.
   cmd: `git ls-files | wc -l`
 
 R21 — Engine shelf: 62 entries counted in `engines/`; directory entries alone do not establish usable capabilities.
@@ -161,7 +161,7 @@ R23 — Review inventory: 74 judge-panel session directories and 5 named adversa
   cmd: `ls counsel-panel/sessions | grep -ci judge`
   cmd: `ls -d counsel-panel/sessions/*design-bible-perfection-audit counsel-panel/sessions/*astra-security-closure counsel-panel/sessions/*genui-live-audit counsel-panel/sessions/*it15-m2-contrast-refute counsel-panel/sessions/*astra-legal-opinion-gate-lift`
 
-R24 — Code: 3,800,651 lines across tracked code files (875,081 lines under the legacy single-batch buffer command), counted 2026-10-20; a later tree can produce a different count.
+R24 — Code: 3,810,125 lines across tracked code files (883,699 lines under the legacy single-batch buffer command), counted 2026-10-21; a later tree can produce a different count.
   cmd: `git ls-files -z | tr '\0' '\n' | grep -E '\.(mjs|js|ts|tsx|jsx|py|swift|c|h|m|mm|css|scss|html|sh|rs|go)$' | tr '\n' '\0' | xargs -0 wc -l 2>/dev/null | awk '$2=="total"{s+=$1} END{print s}'`
   cmd: `git ls-files -z | tr '\0' '\n' | grep -E '\.(mjs|js|ts|tsx|jsx|py|swift|c|h|m|mm|css|scss|html|sh|rs|go)$' | tr '\n' '\0' | xargs -0 wc -l | tail -1`
 
@@ -170,18 +170,18 @@ R25 — First artifact: birth 2026-06-17 23:22:27.
 
 R26 — Project-reported external reproduction statement, unverified publicly, 2026-10-09: a reviewer received source snapshots, ran the code on their machine, and reported: admission broker `26/26`; fracture/contact solver `8/8`; native soft-body harness passed; native sand harness passed (default harness; heavier pile-settling test not run); GPU-vs-f64 gap `0.00435 mm` vs `0.01 mm` gate with `77.8 mm` movement, zero NaNs, zero WebGPU errors (software backend; Apple/NVIDIA performance figures not re-run). No public transcript, source snapshot, or revision manifest is included here. The statement is reported; another reviewer cannot authenticate or reproduce it from this repository.
 
-R27 — Project-reported C11 portability fix, 2026-10-09: `xpbd_soft_init` took `const double rest[4][3]` while callers pass `double[4][3]`; pre-C23 rules reject the conversion, so GCC `13.3` with `-Wpedantic -Werror` refused to compile. The fix drops `const` from the parameter (the function only reads the array) in `engines/physics/native/xpbd-soft.h` and `engines/physics/native/xpbd-soft.c`, plus one call-site word in `engines/resident-shell/face/ResidentPhysics.swift`. The files are tracked and clean in the private tree checked 2026-10-20; that tracking check does not reproduce the external result.
+R27 — Project-reported C11 portability fix, 2026-10-09: `xpbd_soft_init` took `const double rest[4][3]` while callers pass `double[4][3]`; pre-C23 rules reject the conversion, so GCC `13.3` with `-Wpedantic -Werror` refused to compile. The fix drops `const` from the parameter (the function only reads the array) in `engines/physics/native/xpbd-soft.h` and `engines/physics/native/xpbd-soft.c`, plus one call-site word in `engines/resident-shell/face/ResidentPhysics.swift`. The files are tracked and clean in the private tree checked 2026-10-21; that tracking check does not reproduce the external result.
   cmd: `cc -std=c11 -Wall -Wextra -Werror -pedantic xpbd-soft.c xpbd-soft-test.c -lm -o xpbd-soft-test` (from `engines/physics/native/`; exit code `0`, harness prints `ok`)
   cmd: `node --test xpbd-soft-parity.test.mjs` (from `engines/physics/native/`; `9` pass, `0` fail)
   cmd: `sh build.sh` (from `engines/resident-shell/face/`; `build ok`)
   external: the reporter applied the patch and re-ran GCC `13.3` with the same flags: exit code `0`, zero diagnostics, harness prints `ok`.
 
-R28 — Registered destinations: 21 entries in the shared topology owner, checked 2026-10-20. Viral points at `./viral/slap-proof/gpu/gpu-demo.html`; this is a physics diagnostic, with customer-workflow completion not established here.
+R28 — Registered destinations: 21 entries in the shared topology owner, checked 2026-10-21. Viral points at `./viral/slap-proof/gpu/gpu-demo.html`; this is a physics diagnostic, with customer-workflow completion not established here.
   cmd: `node --input-type=module -e 'import {OrbitalTopology} from "./deploy/substrate/topologies/01-orbital-mechanics.mjs"; console.log(Object.keys(OrbitalTopology.routing).length); console.log(OrbitalTopology.routing.viral.door)'`
 
 ## CURRENT SOURCE INVENTORY CHECK
 
-Checked 2026-10-20: topology routing contains 21 entries; hero-runtime source and test and the C11-fix source files are tracked and clean. The hub was tracked with working-tree changes and its fallback links include Viral. These are static source and tracking observations, not product, numerical, GPU, or payment re-runs. Source revisions and byte digests were recorded in the private review receipt; that receipt is not distributed here.
+Checked 2026-10-21: topology routing contains 21 entries; hero-runtime source and test and the C11-fix source files are tracked and clean. The hub was tracked with working-tree changes and its fallback links include Viral. These are static source and tracking observations, not product, numerical, GPU, or payment re-runs. Source revisions and byte digests were recorded in the private review receipt; that receipt is not distributed here.
 
 Tracking command per file: `git ls-files -- <file>` and `git status --porcelain -- <file>`. Digest command per file: `shasum -a 256 <file>`.
 
