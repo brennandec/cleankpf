@@ -8,9 +8,9 @@ For each material finding, give the source and locator, the evidence date or rev
 
 ## PUBLIC EVIDENCE BOUNDARY
 
-This public repository contains this README only. The private source, tests, raw logs, receipts, filing records, and external-review transcript cited below are not included. Commands naming those files require separate access; they cannot be re-run from a clone of this repository. Some archived harnesses also depend on paths in the originating checkout and require path adaptation before use elsewhere. The appendix records reported historical results and reproduction commands, not a public reproducible source bundle. No current product workflow or public deployment is certified by this page. Recorded failures and untested paths remain failures and gaps; the reading rules do not excuse them.
+This public repository contains this README and the `hackathon/` run-record bundle (`24` tracked files). The private repository source, full test tree, raw logs, internal receipts, filing records, and external-review transcript cited below are not included. Commands naming those private files require separate access; they cannot be re-run from a clone of this repository. Some archived harnesses also depend on paths in the originating checkout and require path adaptation before use elsewhere. The appendix records reported historical results and reproduction commands, not a public reproducible source bundle. No current product workflow or public deployment is certified by this page. Recorded failures and untested paths remain failures and gaps; the reading rules do not excuse them.
 
-An outsider can inspect this page and probe the listed public domains. Domain responses establish availability only. Source-dependent results remain unverified by that outsider until the required revision, dependencies, inputs, and logs are supplied. A missing public source bundle is a reproducibility gap; it does not prove the private software is missing.
+An outsider can inspect this page, inspect the `hackathon/` folder, and probe the listed public domains. Domain responses establish availability only. Source-dependent results remain unverified by that outsider until the required revision, dependencies, inputs, and logs are supplied. A missing public source bundle is a reproducibility gap; it does not prove the private software is missing.
 
 Dates apply to individual observations. Re-running against a later tree can change results in either direction. A private receipt path identifies a source without making it publicly accessible. Anonymous external reports below are project-reported statements; no public transcript or source snapshot is attached.
 
@@ -36,6 +36,7 @@ Numbers below are dated project records or explicitly external reports. Access l
 - First artifact: birth 2026-06-17 23:22:27. — R25
 - External reproduction (project-reported external statement, unverified publicly, 2026-10-09): a reviewer ran supplied sources on their machine and reported admission broker `26/26`, fracture solver `8/8`, soft-body and sand harnesses passed, and GPU parity gap `0.00435 mm` against the `0.01 mm` gate with movement and zero NaNs. Their words, their machine. — R26
 - Portability fix (project-reported external finding, 2026-10-09): GCC `13.3` `-Wpedantic` diagnostic on the `xpbd_soft_init` call site; 3 lines changed; the reporter re-ran and confirmed exit code `0` with zero diagnostics. Source files are tracked and clean in the private tree checked 2026-10-21; external re-run report remains unverified publicly. — R27
+- Meta Hackathon acceptance (project-reported status, 2026-10-21): the Receipted Physics Agent application (`hackathon/HACKATHON-APPLICATION.md`, submitted 2026-10-13) was accepted into the Meta Hackathon; the `24` tracked files in `hackathon/` (`hackathon/README.md`, `hackathon/MANIFEST.json`, `hackathon/LEDGER.jsonl`, `hackathon/COMMITTED-STATE.json`) publish the accompanying run record (`14` hash-chained receipt rows, `12` accepted, `2` refused, `0` regressions on the standing run). Event acceptance does not independently verify the technical claims on this page. — R29
 
 ## RECORDED MEASUREMENTS
 
@@ -178,6 +179,9 @@ R27 — Project-reported C11 portability fix, 2026-10-09: `xpbd_soft_init` took 
 
 R28 — Registered destinations: 21 entries in the shared topology owner, checked 2026-10-21. Viral points at `./viral/slap-proof/gpu/gpu-demo.html`; this is a physics diagnostic, with customer-workflow completion not established here.
   cmd: `node --input-type=module -e 'import {OrbitalTopology} from "./deploy/substrate/topologies/01-orbital-mechanics.mjs"; console.log(Object.keys(OrbitalTopology.routing).length); console.log(OrbitalTopology.routing.viral.door)'`
+
+R29 — Meta Hackathon acceptance and `hackathon/` run-record bundle (2026-10-21): application submitted 2026-10-13 (`hackathon/HACKATHON-APPLICATION.md`) and accepted into the Meta Hackathon (project-reported status 2026-10-21); `24` tracked files under `hackathon/` indexed by `hackathon/README.md` and `hackathon/MANIFEST.json`, including `hackathon/LEDGER.jsonl` (`14` rows, `12` accepted, `2` refused) and `hackathon/COMMITTED-STATE.json` (`0` regressions).
+  cmd (in this public repository): `git ls-files hackathon | wc -l` and `cd hackathon && shasum -a 256 -c COMMITTED-STATE.sha256`
 
 ## CURRENT SOURCE INVENTORY CHECK
 
