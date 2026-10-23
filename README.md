@@ -30,13 +30,15 @@ Numbers below are dated project records or explicitly external reports. Access l
 - Git history: 70,965 commits recorded at the cited snapshot; commit metadata does not establish human authorship. — R19
 - Tree: 113,230 tracked files. — R20
 - Engine shelf: 62 entries counted in `engines/`; directory entries alone do not establish usable capabilities. — R21
-- Filing records: 39 dockets labeled filed-confirmed; 28 dockets carry PDF-extracted evidence. These counts do not establish distinct application count or legal scope. — R22
+- Filing records: 39 dockets labeled filed-confirmed across 4 technical waves (Wave-1 covering Resident State atomic revision memory, movable slabs, DRAM compaction, BFT circumvention wall, 8-engine fleet omnibus; Wave-2 covering contactless RF/CSI physiological sensing; Wave-3 covering single-cycle AC modulation, warm-water psychrometric cooling, sharded ring-buffer netting; Wave-4 covering phase-coupled timeline, spatial depth, XPBD fracture, 4DGS Chebyshev synthesis, legal engine); 28 dockets carry PDF-extracted evidence; 31 receipt captures on disk. These counts do not establish distinct application count or legal scope. — R22
 - Review inventory: 74 judge-panel session directories and 5 named adversarial-session directories. Directory counts do not prove completed reviews, independent audits, or a passing verdict. — R23
 - Code: 3,810,125 lines across tracked code files (883,699 lines under the legacy single-batch buffer command). — R24
 - First artifact: birth 2026-06-17 23:22:27. — R25
 - External reproduction (project-reported external statement, unverified publicly, 2026-10-09): a reviewer ran supplied sources on their machine and reported admission broker `26/26`, fracture solver `8/8`, soft-body and sand harnesses passed, and GPU parity gap `0.00435 mm` against the `0.01 mm` gate with movement and zero NaNs. Their words, their machine. — R26
 - Portability fix (project-reported external finding, 2026-10-09): GCC `13.3` `-Wpedantic` diagnostic on the `xpbd_soft_init` call site; 3 lines changed; the reporter re-ran and confirmed exit code `0` with zero diagnostics. Source files are tracked and clean in the private tree checked 2026-10-21; external re-run report remains unverified publicly. — R27
 - Meta Hackathon acceptance (project-reported status, 2026-10-21): the Receipted Physics Agent application (`hackathon/HACKATHON-APPLICATION.md`, submitted 2026-10-13) was accepted into the Meta Hackathon; the `24` tracked files in `hackathon/` (`hackathon/README.md`, `hackathon/MANIFEST.json`, `hackathon/LEDGER.jsonl`, `hackathon/COMMITTED-STATE.json`) publish the accompanying run record (`14` hash-chained receipt rows, `12` accepted, `2` refused, `0` regressions on the standing run). Event acceptance does not independently verify the technical claims on this page. — R29
+- Amazon Developer Hackathon, Alexa+ track, submitted 2026-10-23, before the 19:00 UTC deadline. The public project page, opened 2026-10-23, lists submission `1255328` under Build, Ship, Shape: Amazon Developer Hackathon, and stamps the project 2026-10-23 at 17:04 UTC. The live title is Alexa+ Agent Governance Console and MCP Server. It is a browser console plus a loopback MCP server: the agent proposes a tool action, the console shows the proposal, and the action stays stopped until a person allows it. The page cites the judged export at `20` files and `200,797` bytes, with `21` pass and `0` fail, and a `170.7` s demo at `1920x1080` pixels. That export is a separate private repository. This repository does not contain it. The `2025-11-25` still in the public address is the protocol revision id, not the submission date. — R31
+- Bruce resident-state legal engine: 21 modules in engines/legal/ (second-chair, citation-anchor, deadline-engine, egress-guard, clock-seed, gauntlet-engine, syllogym-adversarial-curriculum, trial-flight-deck, license-review) with 5 code-enforced invariants (sticky process-level egress lock, pre-emission SHA-256 citation-anchor gate, Eastern-Time statutory deadline calculator, seeded Mulberry32 adversarial Gauntlet/SylloGym tournament, deterministic license/waiver evidence reviewer); 89 of 89 deterministic tests pass across 17 suites, 6 of 6 named mutants killed, 11 of 11 license-review tests pass, selftest 10 of 10 checks pass. — R30
 
 ## RECORDED MEASUREMENTS
 
@@ -65,6 +67,7 @@ Numbers below are dated project records or explicitly external reports. Access l
 - hero-runtime — `deploy/_shared/hero-runtime/universe-core.mjs` (630 lines) + test (183 lines); suite `11/11`. Tracked in the private tree checked 2026-10-20; this is a historical suite result. — R01
 - physics — `deploy/_shared/physics/`: `xpbd-rigid.mjs` (`1,245`), `xpbd-soft.mjs` (`753`), `xpbd-collision.mjs` (`2,252`), `spatial-hash-bvh.mjs` (`482`), `physics-world.mjs` (`527`). Committed. — R02
 - substrate GPU runtime — `deploy/substrate/runtime/xpbd-gpu.mjs` (304 lines): WebGPU XPBD checked against a float64 reference. Committed. — R04, R16
+- legal — engines/legal/ (21 modules, 10,820 lines): second-chair.mjs (780 lines), citation-anchor.mjs (425 lines), deadline-engine.mjs (805 lines), egress-guard.mjs (306 lines), clock-seed.mjs (245 lines), gauntlet-engine.mjs (241 lines), syllogym-adversarial-curriculum.mjs (745 lines), trial-flight-deck.mjs (1,128 lines), license-review.mjs (135 lines); suite `89/89` across 17 suites, selftest `10/10` pass. Committed. — R30
 
 ### Dependencies (`package.json`)
 - 8 runtime: c2pa-node, dotenv, pdf-lib, puppeteer, sharp, three, yaml, zod.
@@ -74,6 +77,7 @@ Numbers below are dated project records or explicitly external reports. Access l
 - Spine bus — `deploy/_shared/spine-bus.mjs` (902 lines on 2026-10-21): in-page publish/subscribe, a 10 MiB memory slab, a 50-entry list mirrored in `localStorage`. — R07
 - Teeming bus/spine events — suite 28/28 pass; p95 3.33 µs over 10,000 events. — R10
 - Property hub — `deploy/index.html` consumes the topology owner with 21 registered destinations, checked 2026-10-21. Registration does not certify a useful workflow. — R28
+- Patent portfolio architecture — 39 filed dockets structured across 4 technical waves: Wave-1 (atomic revision memory, movable memory slabs, DRAM compaction, BFT circumvention wall, 8-engine fleet omnibus); Wave-2 (contactless RF/CSI physiological sensing and health event substrate); Wave-3 (single-cycle AC sub-cycle grid modulation, warm-water psychrometric cooling, 96-byte sharded ring-buffer netting, offline hardware certification registry); Wave-4 (phase-coupled timeline, spatial depth, XPBD fracture, 4DGS Chebyshev synthesis, actor-attested receipts, baseline and pixel interlock verifiers, deterministic legal engine). — R22
 
 ## RECEIPTS APPENDIX
 
@@ -153,7 +157,7 @@ R20 — Tracked files: 113,230 files, counted 2026-10-21; a later tree can produ
 R21 — Engine shelf: 62 entries counted in `engines/`; directory entries alone do not establish usable capabilities.
   cmd: `ls engines | wc -l`
 
-R22 — Filings: 39 filed-confirmed dockets in `canon/legal/patents/dockets.jsonl`; 28 dockets carry PDF-extracted evidence; 31 receipt captures on disk.
+R22 — Filings: 39 filed-confirmed dockets in `canon/legal/patents/dockets.jsonl` across 4 technical waves (Wave-1 covering 11 dockets on atomic revision memory, movable slabs, DRAM compaction, 5 BFT circumvention dockets, 8-engine fleet omnibus; Wave-2 covering 3 dockets on contactless physiological and ambient RF/CSI sensing; Wave-3 covering 7 dockets on 16.7 ms single-cycle AC grid load modulation, 45°C/55°C warm-water psychrometric cooling, 96-byte sharded ring-buffer netting engine, offline hardware certification registry; Wave-4 covering 11 dockets on phase-coupled timeline, consequence telehaptics, XPBD fracture, 4DGS Chebyshev synthesis, baseline and pixel interlocks, plus the Bruce legal decision-support engine); 28 dockets carry PDF-extracted evidence; 31 receipt captures on disk.
   cmd: `grep -c FILED-confirmed canon/legal/patents/dockets.jsonl`
   cmd: `grep -c pdf-extracted canon/legal/patents/dockets.jsonl`
   cmd: `find canon/legal/patents -iname "*uspto-receipt*.pdf" | wc -l`
@@ -183,9 +187,17 @@ R28 — Registered destinations: 21 entries in the shared topology owner, checke
 R29 — Meta Hackathon acceptance and `hackathon/` run-record bundle (2026-10-21): application submitted 2026-10-13 (`hackathon/HACKATHON-APPLICATION.md`) and accepted into the Meta Hackathon (project-reported status 2026-10-21); `24` tracked files under `hackathon/` indexed by `hackathon/README.md` and `hackathon/MANIFEST.json`, including `hackathon/LEDGER.jsonl` (`14` rows, `12` accepted, `2` refused) and `hackathon/COMMITTED-STATE.json` (`0` regressions).
   cmd (in this public repository): `git ls-files hackathon | wc -l` and `cd hackathon && shasum -a 256 -c COMMITTED-STATE.sha256`
 
+R30 — Bruce resident-state legal engine: 89 tests, 89 pass, 0 fail across 17 suites; 6 of 6 named mutants killed; 11 of 11 license-review tests pass; 10 of 10 selftest checks pass. Sticky egress lock verified against all network and child-process APIs; citation-anchor gate verified with SHA-256 corpus admission; statutory deadlines verified across 2024–2030 federal holidays under Eastern Time; Mulberry32 seeded gauntlet verified across 20 decision forks.
+  cmd: `node --test engines/legal/tests/*.test.mjs engines/legal/license-review.test.mjs`
+  cmd: `node scripts/bruce.mjs --selftest`
+
+R31 — Amazon Developer Hackathon submission, public page opened 2026-10-23. Submission `1255328`. Title on the page: Alexa+ Agent Governance Console and MCP Server. The page lists the project as submitted to Build, Ship, Shape: Amazon Developer Hackathon. Page stamp: 2026-10-23 17:04 UTC. Deadline: 2026-10-23 19:00 UTC. The page cites `20` files, `200,797` bytes, `21` pass, `0` fail, and a `170.7` s video at `1920x1080` pixels. The judged repository is private and is not this repository. The `2025-11-25` in the address is the protocol revision id.
+  page: `https://devpost.com/software/alexa-autonomous-agent-governance-console-mcp-2025-11-25`
+  video: `https://www.youtube.com/watch?v=Fp5rXegEDLg`
+
 ## CURRENT SOURCE INVENTORY CHECK
 
-Checked 2026-10-21: topology routing contains 21 entries; hero-runtime source and test and the C11-fix source files are tracked and clean. The hub was tracked with working-tree changes and its fallback links include Viral. These are static source and tracking observations, not product, numerical, GPU, or payment re-runs. Source revisions and byte digests were recorded in the private review receipt; that receipt is not distributed here.
+Checked 2026-10-21: topology routing contains 21 entries; hero-runtime source and test and the C11-fix source files are tracked and clean. Checked 2026-10-23: the Amazon Developer Hackathon public project page listed in R31 was open and named that submission. The hub was tracked with working-tree changes and its fallback links include Viral. These are static source and tracking observations, not product, numerical, GPU, or payment re-runs. Source revisions and byte digests were recorded in the private review receipt; that receipt is not distributed here.
 
 Tracking command per file: `git ls-files -- <file>` and `git status --porcelain -- <file>`. Digest command per file: `shasum -a 256 <file>`.
 
